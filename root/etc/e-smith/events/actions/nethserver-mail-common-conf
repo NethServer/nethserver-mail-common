@@ -1,0 +1,14 @@
+#!/usr/bin/perl
+
+#
+# NethServer
+#
+# Copyright (C) 2012 Nethesis srl
+# See COPYING for licensing informations
+#
+
+use NethServer::Service;
+
+NethServer::Service::manage_add('nethserver-mail-common',
+				'postfix');
+

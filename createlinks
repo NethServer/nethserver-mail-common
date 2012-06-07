@@ -4,3 +4,18 @@ use strict;
 use esmith::Build::CreateLinks qw(:all);
 
 
+#
+# UPDATE event
+#
+
+event_templates('nethserver-mail-common-update',
+		'/etc/postfix/main.cf',
+		'/etc/postfix/master.cf');
+
+event_actions('nethserver-mail-common-update',
+	      'nethserver-mail-common-conf' => '20',
+	      'firewall-adjust' => '30',
+	      'runlevel-adjust' => '40');
+
+event_services('nethserver-mail-common-update',
+	       'postfix' => 'restart');
