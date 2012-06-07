@@ -1,0 +1,20 @@
+#
+# Smarthost/relayhost configuration { $mail{SmartHostStatus} eq 'enabled' ? 'enabled' : 'disabled'; }
+#
+{
+    if($mail{SmartHostStatus} ne 'enabled') {
+	return "\n";
+    }
+
+    if(! ($mail{SmartHostName} && $mail{SmartHostPort} ) ) {
+	die("Missing required database value");
+    }
+
+    my $auth_enable = $mail{SmartHostAuthStatus} eq 'enabled' ? 'yes' : 'no';
+	
+    return <<FRAGMENT
+relayhost = [$mail{SmartHostName}]:$mail{SmartHostPort}
+smtp_sasl_auth_enable = ${auth_enable}
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+FRAGMENT
+}

@@ -1,0 +1,22 @@
+#
+# Routing relay configuration is { $mail{RoutingType} eq 'relay' ? 'enabled' : 'disabled'; }
+#
+{
+    if($mail{RoutingType} ne 'relay') {
+	return "\n";
+    }
+
+    my $domains = join(", ", $domainsDb->keys());
+    my $hostname = $mail{RoutingRelayHost};
+    my $port = $mail{RoutingRelayPort};
+
+    if( ! $port) {
+	$port = '25';
+    }
+
+    return <<FRAGMENT
+relay_domains = ${domains}
+relay_recipient_maps =
+relay_transport = relay:[${hostname}]:${port}
+FRAGMENT
+}

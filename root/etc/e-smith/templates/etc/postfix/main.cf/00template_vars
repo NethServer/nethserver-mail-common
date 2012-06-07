@@ -1,0 +1,5 @@
+{
+    use esmith::DomainsDB;
+    $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
+    return '';
+}

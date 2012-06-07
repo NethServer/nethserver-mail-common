@@ -24,4 +24,3 @@ setgid_group = postdrop
 unknown_local_recipient_reject_code = 550
 inet_protocols = all
 
-

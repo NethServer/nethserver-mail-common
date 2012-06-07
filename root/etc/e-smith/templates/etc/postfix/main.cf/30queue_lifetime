@@ -1,0 +1,9 @@
+#
+# Max queue lifetime { $mail{MessageQueueLifetime} eq 'default' ? 'defaults to 5d' : '' }
+#
+{
+    if ( $mail{MessageQueueLifetime} ne 'default' ) {
+	$OUT ='maximal_queue_lifetime = ' . $mail{MessageQueueLifetime};
+    }
+}
+
