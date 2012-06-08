@@ -4,13 +4,17 @@ use strict;
 use esmith::Build::CreateLinks qw(:all);
 
 
+my @templates = qw(
+    /etc/postfix/main.cf
+    /etc/postfix/master.cf
+    /etc/postfix/sasl_passwd
+);
+
 #
 # UPDATE event
 #
 
-event_templates('nethserver-mail-common-update',
-		'/etc/postfix/main.cf',
-		'/etc/postfix/master.cf');
+event_templates('nethserver-mail-common-update', @templates);
 
 event_actions('nethserver-mail-common-update',
 	      'nethserver-mail-common-conf' => '20',
@@ -19,3 +23,14 @@ event_actions('nethserver-mail-common-update',
 
 event_services('nethserver-mail-common-update',
 	       'postfix' => 'restart');
+
+
+
+#
+# SAVE event
+#
+
+event_templates('nethserver-mail-common-save', @templates);
+ 
+event_services('nethserver-mail-common-save',
+	       'postfix' => 'reload');
