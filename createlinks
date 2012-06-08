@@ -19,6 +19,7 @@ event_templates('nethserver-mail-common-update', @templates);
 event_actions('nethserver-mail-common-update',
 	      'initialize-default-databases' => '00',
 	      'nethserver-mail-common-conf' => '20',
+	      'nethserver-mail-postmap-update' => '30',
 	      'firewall-adjust' => '30',
 	      'runlevel-adjust' => '40');
 
@@ -32,6 +33,9 @@ event_services('nethserver-mail-common-update',
 #
 
 event_templates('nethserver-mail-common-save', @templates);
- 
+
+event_actions('nethserver-mail-common-save',
+	      'nethserver-mail-postmap-update' => '20');
+
 event_services('nethserver-mail-common-save',
 	       'postfix' => 'reload');
