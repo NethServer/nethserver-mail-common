@@ -1,1 +1,1 @@
-/etc/postfix/sasl_passwd
+/etc/postfix/sasl_passwd,/etc/postfix/tls_policy
