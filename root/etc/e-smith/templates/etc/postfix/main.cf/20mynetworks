@@ -1,0 +1,3 @@
+# Only the local host is considered trusted by default
+mynetworks_style = host
+
