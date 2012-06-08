@@ -17,6 +17,7 @@ my @templates = qw(
 event_templates('nethserver-mail-common-update', @templates);
 
 event_actions('nethserver-mail-common-update',
+	      'initialize-default-databases' => '00',
 	      'nethserver-mail-common-conf' => '20',
 	      'firewall-adjust' => '30',
 	      'runlevel-adjust' => '40');

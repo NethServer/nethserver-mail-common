@@ -18,8 +18,11 @@ my $subject = shift;
 my $timestamp = strftime("%a, %d %b %Y %H:%M:%S %z", localtime());
 
 my $msg = Mail::Send->new;
-$msg = Mail::Send->new(Subject => $subject, To => $to_address);
+$msg = Mail::Send->new();
+$msg->to($to_address);
+$msg->subject($subject);
 $msg->set('Date', $timestamp);
+$msg->set('From', $from_address);
 
 my $fh = $msg->open('smtp', Server => $smtp_server) || die("Could not open connection to $smtp_server\n");
 print $fh <<MESSAGE;
