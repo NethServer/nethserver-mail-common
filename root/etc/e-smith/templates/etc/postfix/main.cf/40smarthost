@@ -11,12 +11,13 @@
     }
 
     my $auth_enable = $mail{SmartHostAuthStatus} eq 'enabled' ? 'yes' : 'no';
+    my $options = $mail{SmartHostAuthStatus} eq 'enabled' ? 'noanonymous' : '';
 	
     return <<FRAGMENT
 relayhost = [$mail{SmartHostName}]:$mail{SmartHostPort}
 smtp_sasl_auth_enable = ${auth_enable}
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-smtp_sasl_security_options = noanonymous
+smtp_sasl_security_options = $options
 smtp_tls_policy_maps = hash:/etc/postfix/tls_policy
 FRAGMENT
 }
