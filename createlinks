@@ -8,6 +8,7 @@ my @templates = qw(
     /etc/postfix/main.cf
     /etc/postfix/master.cf
     /etc/postfix/sasl_passwd
+    /etc/postfix/tls_policy
 );
 
 #
