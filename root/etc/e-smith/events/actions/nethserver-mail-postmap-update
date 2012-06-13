@@ -16,7 +16,7 @@ my $event = shift;
 
 my $configDb = esmith::ConfigDB->open_ro() || die('Could not open Config DB');
 
-my @postmapList = split(',', $configDb->get_prop('mail', 'PostmapUpdateList'));
+my @postmapList = split(',', $configDb->get_prop('postfix', 'PostmapUpdateList'));
 
 foreach my $db (@postmapList) {
     if( -r $db ) {

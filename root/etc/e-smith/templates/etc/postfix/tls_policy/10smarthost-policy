@@ -1,16 +1,16 @@
 {
-    if($mail{SmartHostStatus} ne 'enabled') {
+    if($postfix{SmartHostStatus} ne 'enabled') {
 	return '';
     }
     
-    if(! ($mail{SmartHostName} 
-	  && $mail{SmartHostPort} 
-	  && $mail{SmartHostTlsStatus}
+    if(! ($postfix{SmartHostName} 
+	  && $postfix{SmartHostPort} 
+	  && $postfix{SmartHostTlsStatus}
        ) ) {
 	die("Missing required database value");
     }
 
-    return "[" . $mail{SmartHostName} . "]:" . $mail{SmartHostPort} . "\t\t" . 
-	($mail{SmartHostTlsStatus} eq 'enabled' ? 'encrypt' : 'may');
+    return "[" . $postfix{SmartHostName} . "]:" . $postfix{SmartHostPort} . "\t\t" . 
+	($postfix{SmartHostTlsStatus} eq 'enabled' ? 'encrypt' : 'may');
 }
 

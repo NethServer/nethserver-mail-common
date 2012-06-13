@@ -1,5 +1,5 @@
 #
 # Max message size
 #
-message_size_limit = { $mail{MessageSizeMax} }
+message_size_limit = { $postfix{MessageSizeMax} }
 
