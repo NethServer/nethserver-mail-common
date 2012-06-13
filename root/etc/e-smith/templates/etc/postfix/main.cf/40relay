@@ -1,0 +1,21 @@
+#
+# Relay domains
+#
+{
+
+    my @domainList = ();
+
+    foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
+	if($domainRecord->prop('TransportType') eq 'Relay') {
+	    push @domainList, $domainRecord->key;
+	}
+    }
+
+    $domains = join(' ', @domainList);
+
+    return <<FRAGMENT;
+relay_domains = $domains
+FRAGMENT
+}
+
+

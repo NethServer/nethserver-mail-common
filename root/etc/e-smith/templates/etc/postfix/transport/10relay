@@ -1,0 +1,30 @@
+#
+# Relay
+#
+{
+    use esmith::DomainsDB;
+
+    my $domainsDb = esmith::DomainsDB->open_ro();
+
+    $OUT = '';
+
+    foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
+
+	if($domainRecord->prop('TransportType') ne 'Relay') {
+	    next;
+	}
+
+	my $domainName = $domainRecord->key;
+	my $hostName = $domainRecord->prop{RelayHost};
+	my $port = $postfix{RelayPort};
+	
+	if( ! $port) {
+	    $port = '25';
+	}
+	
+	$OUT .= '.' . $domainName . "\t\t" . relay:[${hostName}]:${port}
+
+    }
+
+
+}
