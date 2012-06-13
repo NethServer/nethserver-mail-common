@@ -1,5 +1,5 @@
 #
-# Relay
+# Relay transports
 #
 {
     use esmith::DomainsDB;

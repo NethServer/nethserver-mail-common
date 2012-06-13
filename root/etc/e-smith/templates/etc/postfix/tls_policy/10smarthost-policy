@@ -1,3 +1,6 @@
+#
+# SmartHost policy
+#
 {
     if($postfix{SmartHostStatus} ne 'enabled') {
 	return '';
