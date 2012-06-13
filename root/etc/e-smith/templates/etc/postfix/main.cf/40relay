@@ -1,8 +1,4 @@
-#
-# Relay domains
-#
 {
-
     my @domainList = ();
 
     foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
@@ -13,9 +9,19 @@
 
     $domains = join(' ', @domainList);
 
-    return <<FRAGMENT;
-relay_domains = $domains
-FRAGMENT
+    my $status = (scalar @domainList) ? 'enabled' : 'disabled';
+
+    $OUT = <<HEADER;
+#
+# Relay domains configuration is $status
+#
+HEADER
+	
+    if($status eq 'enabled') {
+	$OUT .= 'relay_domains = ' .  $domains;
+    }
+
+    return $OUT;
 }
 
 

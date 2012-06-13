@@ -1,5 +1,5 @@
 #
-# Smarthost/relayhost configuration { $postfix{SmartHostStatus} eq 'enabled' ? 'enabled' : 'disabled'; }
+# Smarthost configuration is { $postfix{SmartHostStatus} eq 'enabled' ? 'enabled' : 'disabled'; }
 #
 {
     if($postfix{SmartHostStatus} ne 'enabled') {

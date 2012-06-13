@@ -15,14 +15,14 @@
 	}
 
 	my $domainName = $domainRecord->key;
-	my $hostName = $domainRecord->prop{RelayHost};
-	my $port = $postfix{RelayPort};
+	my $hostName = $domainRecord->prop('RelayHost');
+	my $port = $domainRecord->prop('RelayPort');
 	
 	if( ! $port) {
 	    $port = '25';
 	}
 	
-	$OUT .= '.' . $domainName . "\t\t" . relay:[${hostName}]:${port}
+	$OUT .= '.' . $domainName . "\t\t" . "relay:[${hostName}]:${port}";
 
     }
 
