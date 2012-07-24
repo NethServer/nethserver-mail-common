@@ -41,3 +41,21 @@ event_actions('nethserver-mail-common-save',
 
 event_services('nethserver-mail-common-save',
 	       'postfix' => 'reload');
+
+
+#
+# domain events
+#
+
+my @domainTemplates = qw(
+    /etc/postfix/main.cf
+    /etc/postfix/transport
+    /etc/postfix/vmailbox
+    /etc/postfix/virtual
+);
+
+foreach (qw(create modify delete)) {
+    event_templates('domain-' . $_, @domainTemplates);
+    event_actions('domain-'   . $_, 'nethserver-mail-postmap-update' => '30');
+    event_services('domain-'  . $_, 'postfix' => 'reload');
+}

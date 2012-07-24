@@ -33,6 +33,7 @@ use Nethgui\Controller\Table\Modify as Table;
  */
 class Modify extends \Nethgui\Controller\Table\Modify
 {
+
     public function initialize()
     {
         $parameterSchema = array(
@@ -46,7 +47,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
 
         parent::initialize();
     }
-    
+
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
         parent::prepareView($view);
@@ -56,6 +57,16 @@ class Modify extends \Nethgui\Controller\Table\Modify
             'delete' => 'Nethgui\Template\Table\Delete',
         );
         $view->setTemplate($templates[$this->getIdentifier()]);
+    }
+
+    public function onParametersSaved()
+    {
+        if ($this->getIdentifier() === 'update') {
+            $event = 'modify';
+        } else {
+            $event = $this->getIdentifier();
+        }
+        $this->getPlatform()->signalEvent(sprintf('domain-%s@post-process', $event), array($this->parameters['domain']));
     }
 
 }
