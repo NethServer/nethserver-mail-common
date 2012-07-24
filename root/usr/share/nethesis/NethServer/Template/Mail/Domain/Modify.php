@@ -15,18 +15,19 @@ echo $view->header('domain')->setAttribute('template', $headerText);
 echo $view->textInput('domain', $keyStyles);
 echo $view->textInput('Description');
 
-$transportPanel = $view->fieldset('domain')->setAttribute('template', $T('Messages to domain ${0}'));
+$transportPanel = $view->fieldset('domain')
+    ->setAttribute('template', $T('Messages to domain ${0}'))
+    ->insert($view->radioButton('TransportType', 'Reject'))
+;
 
 foreach ($view['PlugTransport'] as $pluginView) {
     $value = $pluginView->getModule()->getIdentifier();
     $transportPanel->insert(
-        $view->fieldsetSwitch('TransportType', $value , $view::FIELDSETSWITCH_EXPANDABLE)
+        $view->fieldsetSwitch('TransportType', $value, $view::FIELDSETSWITCH_EXPANDABLE)
             ->setAttribute('label', $pluginView->translate('TransportType_' . $value . '_label'))
             ->insert($view->literal($pluginView))
     );
 }
-
-$transportPanel->insert($view->radioButton('TransportType', 'Reject'));
 
 echo $transportPanel;
 
