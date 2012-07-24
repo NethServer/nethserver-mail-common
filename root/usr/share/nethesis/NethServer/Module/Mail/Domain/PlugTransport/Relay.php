@@ -36,7 +36,11 @@ class Relay extends \Nethgui\Controller\Table\RowPluginAction
     {
         $this->setSchemaAddition(array(
             array('RelayHost', Validate::HOSTNAME, Table::FIELD),
-        ));
+            array('RelayPort', $this->createValidator()->memberOf('24', '25'), Table::FIELD ),
+        ));               
+        
+        $this->setDefaultValue('RelayPort', '25');
+        
         parent::initialize();
     }
 
