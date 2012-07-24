@@ -40,9 +40,9 @@ class Domain extends \Nethgui\Controller\TableController
         $this
             ->setTableAdapter($this->getPlatform()->getTableAdapter('domains', 'domain'))
             ->setColumns($columns)
-            ->addRowAction(new \NethServer\Module\Mail\Domain\Modify('update'))
+            ->addRowActionPluggable(new \NethServer\Module\Mail\Domain\Modify('update'), 'PlugTransport')
             ->addRowAction(new \NethServer\Module\Mail\Domain\Modify('delete'))
-            ->addTableAction(new \NethServer\Module\Mail\Domain\Modify('create'))
+            ->addTableActionPluggable(new \NethServer\Module\Mail\Domain\Modify('create'), 'PlugTransport')
             ->addTableAction(new \Nethgui\Controller\Table\Help('Help'))
         ;
                 

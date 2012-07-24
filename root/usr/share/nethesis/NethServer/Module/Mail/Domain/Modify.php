@@ -38,9 +38,11 @@ class Modify extends \Nethgui\Controller\Table\Modify
         $parameterSchema = array(
             array('domain', Validate::HOSTNAME_FQDN, Table::KEY),
             array('Description', Validate::ANYTHING, Table::FIELD),
+            array('TransportType', Validate::ANYTHING, Table::FIELD),
         );
 
         $this->setSchema($parameterSchema);
+        $this->setDefaultValue('TransportType', 'Reject');
 
         parent::initialize();
     }
