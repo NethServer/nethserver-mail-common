@@ -59,7 +59,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
         $view->setTemplate($templates[$this->getIdentifier()]);
     }
 
-    public function onParametersSaved()
+    public function onParametersSaved($changedParameters)
     {
         if ($this->getIdentifier() === 'update') {
             $event = 'modify';
