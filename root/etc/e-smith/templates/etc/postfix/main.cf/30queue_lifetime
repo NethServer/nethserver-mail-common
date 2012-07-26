@@ -3,7 +3,8 @@
 #
 {
     if ( $postfix{MessageQueueLifetime} ne 'default' ) {
-	$OUT ='maximal_queue_lifetime = ' . $postfix{MessageQueueLifetime};
+	$OUT = 'maximal_queue_lifetime = ' . $postfix{MessageQueueLifetime} . "\n";
+	$OUT .= 'bounce_queue_lifetime = ' . $postfix{MessageQueueLifetime};
     }
 }
 

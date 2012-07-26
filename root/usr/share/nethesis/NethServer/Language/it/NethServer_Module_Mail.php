@@ -23,3 +23,5 @@ $L['SmartHostPort_label'] = 'Porta';
 $L['SmartHostUsername_label'] = 'Nome utente';
 $L['SmartHostPassword_label'] = 'Password';
 $L['SmartHostTlsStatus_label'] = 'Consenti connessione non cifrata';
+
+$L['Key_label'] = 'Dominio';

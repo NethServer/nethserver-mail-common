@@ -6,3 +6,4 @@ $L['Messages to domain ${0}'] = 'Messages @${0}';
 $L['TransportType_Reject_label'] = 'Reject';
 $L['TransportType_Relay_label'] = 'Relay to another server';
 
+$L['Key_label'] = 'Domain';
