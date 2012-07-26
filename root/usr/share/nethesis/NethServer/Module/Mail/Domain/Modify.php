@@ -43,7 +43,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
         );
 
         $this->setSchema($parameterSchema);
-        $this->setDefaultValue('TransportType', 'Reject');
+        $this->setDefaultValue('TransportType', 'Relay');
 
         parent::initialize();
     }

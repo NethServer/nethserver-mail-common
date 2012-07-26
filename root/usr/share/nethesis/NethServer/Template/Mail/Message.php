@@ -24,4 +24,4 @@ echo $view->fieldsetSwitch('SmartHostStatus', 'enabled', $view::FIELDSETSWITCH_C
     ->insert($view->checkbox('SmartHostTlsStatus', 'disabled')->setAttribute('uncheckedValue', 'enabled'))
 ;
 
-echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_CANCEL);
+echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP);

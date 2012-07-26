@@ -17,7 +17,6 @@ echo $view->textInput('Description');
 
 $transportPanel = $view->fieldset('domain')
     ->setAttribute('template', $T('Messages to domain ${0}'))
-    ->insert($view->radioButton('TransportType', 'Reject'))
 ;
 
 foreach ($view['PlugTransport'] as $pluginView) {
