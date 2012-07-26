@@ -34,7 +34,15 @@ class Message extends \Nethgui\Controller\AbstractController
 
     public function initialize()
     {
-        $this->declareParameter('MessageSizeMax', $this->createValidator(Validate::POSITIVE_INTEGER)->lessThan(1024), array('configuration', 'postfix', 'MessageSizeMax'));
+        $messageSizeMaxAdapter = $this->getPlatform()->getMapAdapter(
+            function($s) {
+                return $s / 1000000;
+            }, function($v) {
+                return array($v * 1000000);
+            }, array(array('configuration', 'postfix', 'MessageSizeMax'))
+        );
+
+        $this->declareParameter('MessageSizeMax', $this->createValidator(Validate::POSITIVE_INTEGER)->lessThan(1001), $messageSizeMaxAdapter);
         $this->declareParameter('MessageQueueLifetime', $this->createValidator(Validate::POSITIVE_INTEGER)->lessThan(31), array('configuration', 'postfix', 'MessageQueueLifetime'));
         $this->declareParameter('SmartHostStatus', Validate::SERVICESTATUS, array('configuration', 'postfix', 'SmartHostStatus'));
         $this->declareParameter('SmartHostName', Validate::HOSTNAME, array('configuration', 'postfix', 'SmartHostName'));
@@ -46,7 +54,7 @@ class Message extends \Nethgui\Controller\AbstractController
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
-    {       
+    {
         $view['MessageSizeMaxDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
                 '10' => '10 MB',
                 '20' => '20 MB',
@@ -54,10 +62,10 @@ class Message extends \Nethgui\Controller\AbstractController
                 '100' => '100 MB',
                 '200' => '200 MB',
                 '500' => '500 MB',
-                '1024' => '1 GB',
+                '1000' => '1 GB',
             ));
 
-        $view['MessageQueueLifetimeDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(                
+        $view['MessageQueueLifetimeDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
                 '1' => $view->translate('${0} day', array(1)),
                 '2' => $view->translate('${0} days', array(2)),
                 '4' => $view->translate('${0} days', array(4)),
@@ -65,8 +73,13 @@ class Message extends \Nethgui\Controller\AbstractController
                 '15' => $view->translate('${0} days', array(15)),
                 '30' => $view->translate('${0} days', array(30)),
             ));
-        
+
         parent::prepareView($view);
+    }
+
+    protected function onParametersSaved($changedParameters)
+    {
+        $this->getPlatform()->signalEvent('nethserver-mail-common-save@post-process');
     }
 
 }

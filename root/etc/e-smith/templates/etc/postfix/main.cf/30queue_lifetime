@@ -1,5 +1,5 @@
 #
-# Max queue lifetime { $postfix{MessageQueueLifetime} eq 'default' ? 'defaults to 5d' : '' }
+# 30queue_lifetime -- Max queue lifetime { $postfix{MessageQueueLifetime} eq 'default' ? 'defaults to 5d' : '' }
 #
 {
     if ( $postfix{MessageQueueLifetime} ne 'default' ) {
