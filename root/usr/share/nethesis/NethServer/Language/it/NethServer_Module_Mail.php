@@ -8,6 +8,7 @@ $L['Domain_Title'] = 'Domini';
 $L['Update domain `${0}`'] = 'Modifica il dominio di posta `${0}`';
 $L['Create a new domain'] = 'Crea un nuovo dominio di posta';
 $L['Messages to domain ${0}'] = 'Messaggi @${0}';
+$L['Messages to this domain'] = 'Messaggi a questo dominio';
 $L['TransportType_Reject_label'] = 'Rifiuta';
 $L['TransportType_Relay_label'] = 'Passa ad un altro server';
 $L['domain_label'] = 'Dominio';

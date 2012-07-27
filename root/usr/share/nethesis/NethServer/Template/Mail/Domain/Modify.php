@@ -4,9 +4,11 @@ $view->requireFlag($view::INSET_FORM);
 
 if ($view->getModule()->getIdentifier() == 'update') {
     $headerText = $T('Update domain `${0}`');
+    $messagesText = $T('Messages to domain ${0}');
     $keyStyles = $view::STATE_READONLY;
 } else {
     $headerText = $T('Create a new domain');
+    $messagesText = $T('Messages to this domain');
     $keyStyles = 0;
 }
 
@@ -16,7 +18,7 @@ echo $view->textInput('domain', $keyStyles);
 echo $view->textInput('Description');
 
 $transportPanel = $view->fieldset('domain')
-    ->setAttribute('template', $T('Messages to domain ${0}'))
+    ->setAttribute('template', $messagesText)
 ;
 
 foreach ($view['PlugTransport'] as $pluginView) {
