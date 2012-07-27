@@ -1,0 +1,11 @@
+#
+# 40smtpd_recipient_restriction -- Add checks for undeliverable recipients on relay hosts
+#
+smtpd_recipient_restrictions = { 
+    @smtpd_recipient_restrictions = (@smtpd_recipient_restrictions, 
+    'reject_unknown_recipient_domain', 
+    'reject_unverified_recipient'); 
+
+    $OUT = join(', ', @smtpd_recipient_restrictions) 
+}   
+
