@@ -12,3 +12,4 @@ smtp      inet  n       -       n       -       -       smtpd
 # MSA ports:
 submission inet n       -       n       -       -       smtpd
 465	   inet	n	-	n	-	-	smtpd
+

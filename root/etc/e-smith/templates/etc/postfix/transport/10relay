@@ -22,7 +22,7 @@
 	    $port = '25';
 	}
 	
-	$OUT .= '.' . $domainName . "\t\t" . "relay:[${hostName}]:${port}";
+	$OUT .= $domainName . "\t\t" . "relay:[${hostName}]:${port}";
 
     }
 
