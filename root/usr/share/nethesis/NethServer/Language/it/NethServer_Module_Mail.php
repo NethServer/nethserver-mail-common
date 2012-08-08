@@ -14,7 +14,7 @@ $L['TransportType_Relay_label'] = 'Passa ad un altro server';
 $L['domain_label'] = 'Dominio';
 
 $L['Message_Title'] = 'Messaggi';
-$L['${0} day'] = '${0} giorno';
+$L['${0} day'] = 'un giorno';
 $L['${0} days'] = '${0} giorni';
 $L['Queue message max size (${0})'] = 'Accetta messaggi fino a ${0}';
 $L['Queue message lifetime (${0})'] = 'Tenta l\'invio per ${0}';
