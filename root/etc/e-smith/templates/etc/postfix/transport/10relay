@@ -1,5 +1,6 @@
+
 #
-# Relay transports
+# 10relay -- Relay transports
 #
 {
     use esmith::DomainsDB;
@@ -22,7 +23,7 @@
 	    $port = '25';
 	}
 	
-	$OUT .= $domainName . "\t\t" . "relay:[${hostName}]:${port}";
+	$OUT .= sprintf("%-32s relay:[%s]:%s\n", $domainName, $hostName, $port);
 
     }
 
