@@ -1,6 +1,19 @@
 {
     use esmith::DomainsDB;
     $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
-    @smtpd_recipient_restrictions = ('permit_mynetworks', 'reject_unauth_destination');
+    @smtpd_recipient_restrictions = (
+        'reject_unauth_pipelining',
+        'reject_non_fqdn_recipient',
+        'reject_unknown_recipient_domain', 
+	'permit_mynetworks',
+        'reject_unauth_destination',
+        'reject_unverified_recipient',
+    );
+    @smtpd_sender_restrictions = (
+	'permit_sasl_authenticated',
+	'permit_mynetworks',
+	'reject_non_fqdn_sender',
+	'reject_unknown_sender_domain'
+    );     
     return '';
 }
