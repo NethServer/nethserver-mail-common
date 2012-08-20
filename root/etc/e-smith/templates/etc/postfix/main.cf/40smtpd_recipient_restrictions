@@ -1,5 +1,0 @@
-#
-# 40smtpd_recipient_restrictions 
-#
-smtpd_recipient_restrictions = { join(",\n ", @smtpd_recipient_restrictions); }
-

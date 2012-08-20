@@ -1,5 +1,0 @@
-#
-# 40smtpd_sender_restrictions 
-#
-smtpd_sender_restrictions = { join(",\n ", @smtpd_sender_restrictions); }
-
