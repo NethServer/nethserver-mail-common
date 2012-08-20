@@ -1,0 +1,15 @@
+#
+# 40smtpd_sender_restrictions 
+#
+smtpd_sender_restrictions = { 
+    @smtpd_sender_restrictions = (
+	'permit_sasl_authenticated',
+	'permit_mynetworks',
+	'reject_non_fqdn_sender'
+	'reject_unknown_sender_domain',
+        @smtpd_sender_restrictions, 
+    ); 
+
+    $OUT = join(', ', @smtpd_sender_restrictions) 
+}   
+
