@@ -1,0 +1,33 @@
+{
+    use esmith::DomainsDB;
+
+    my $domainsDb = esmith::DomainsDB->open_ro();
+
+    $OUT = '';
+
+    foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
+
+	if($domainRecord->prop('TransportType') ne 'SmtpSink') {
+	    next;
+	}
+
+	my $domainName = $domainRecord->key;
+	
+	$OUT .= sprintf("%-32s lmtp:unix:/var/spool/postfix/smtp-sink\n", $domainName);
+
+    }
+
+    if($OUT) {
+
+	$OUT = '
+#
+# 20smtpsink -- test transport
+# 
+# run smtp-sink to eat incoming messages:
+#
+#   # /usr/sbin/smtp-sink -L -c -u postfix unix:/var/spool/postfix/smtp-sink 128
+#
+' . $OUT;
+    }
+
+}
