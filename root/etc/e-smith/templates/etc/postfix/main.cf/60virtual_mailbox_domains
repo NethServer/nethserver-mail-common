@@ -1,0 +1,11 @@
+#
+# 60virtual_mailbox_domains -- All local virtual destinations:
+# {
+    foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
+	if($domainRecord->prop('TransportType') eq 'SmtpSink') {
+	    push @virtual_mailbox_domains, $domainRecord->key;
+	}
+    }
+}
+virtual_mailbox_domains = { join("\n  ", @virtual_mailbox_domains) }
+
