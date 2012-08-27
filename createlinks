@@ -10,6 +10,7 @@ my @templates = qw(
     /etc/postfix/transport
     /etc/postfix/sasl_passwd
     /etc/postfix/tls_policy
+    /etc/postfix/vmailbox
 );
 
 #

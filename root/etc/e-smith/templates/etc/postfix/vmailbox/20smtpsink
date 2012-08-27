@@ -1,0 +1,18 @@
+#
+# 20smtpsink
+#
+{
+    use esmith::DomainsDB;
+
+    $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open domains DB');
+
+    $OUT = '';
+
+    foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
+	if($domainRecord->prop('TransportType') eq 'SmtpSink') {
+	    $OUT .= sprintf("@%-42s ok\n", $domainRecord->key);
+	}
+    }
+
+    $OUT;
+}
