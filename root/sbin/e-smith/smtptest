@@ -89,7 +89,7 @@ if ($options{input}) {
     my $hasTo;
     my $inHeader = 1;
 
-    open(INPUT, '< ' . $options{input}) or die();
+    open(INPUT, '< ' . $options{input}) or die($options{input} . ': ' . $!);
     while( ! eof INPUT ) {
 	my $line .= <INPUT>;
 
