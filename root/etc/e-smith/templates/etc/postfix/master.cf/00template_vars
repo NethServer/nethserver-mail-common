@@ -1,0 +1,16 @@
+{
+    # 
+    # 00vars
+    #
+
+    # options for public smtp server:
+    @smtpd_public_options = ();
+
+    # By default, the client connection count limit is set to half the
+    # default process limit value.
+    if($postfix{ConnectionsLimitPerIp} > 0) {
+	push @smtpd_public_options, 'smtpd_client_connection_count_limit=' . $postfix{ConnectionsLimitPerIp};
+    }
+
+    '';
+}
