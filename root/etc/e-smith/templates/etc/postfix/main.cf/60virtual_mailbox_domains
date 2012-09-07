@@ -9,3 +9,5 @@
 }
 virtual_mailbox_domains = { join("\n  ", @virtual_mailbox_domains) }
 virtual_mailbox_maps = { scalar @virtual_mailbox_domains ? 'hash:/etc/postfix/vmailbox' : '' }
+
+

@@ -1,5 +1,5 @@
 #
-# Smarthost configuration is { $postfix{SmartHostStatus} eq 'enabled' ? 'enabled' : 'disabled'; }
+# 40smarthost -- Smarthost configuration is { $postfix{SmartHostStatus} eq 'enabled' ? 'enabled' : 'disabled'; }
 #
 {
     if($postfix{SmartHostStatus} ne 'enabled') {
@@ -21,3 +21,5 @@ smtp_sasl_security_options = $options
 smtp_tls_policy_maps = hash:/etc/postfix/tls_policy
 FRAGMENT
 }
+
+

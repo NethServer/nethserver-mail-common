@@ -13,7 +13,7 @@
 
     $OUT = <<HEADER;
 #
-# Relay domains configuration is $status
+# 40relay -- Relay domains configuration is $status
 #
 HEADER
 	

@@ -1,5 +1,6 @@
 #
-# Enable the /etc/postfix/transport table
+# 20transport_maps -- Enable the /etc/postfix/transport table
 #
 transport_maps = hash:/etc/postfix/transport
+
 
