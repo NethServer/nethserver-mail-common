@@ -1,10 +1,13 @@
 {
     # 
-    # 00vars
+    # 00template_vars
     #
 
     # options for public smtp server:
-    @smtpd_public_options = ();
+    @smtpd_public_options = (
+	'smtpd_helo_required=yes',
+	'strict_rfc821_envelopes=yes',
+    );
 
     # By default, the client connection count limit is set to half the
     # default process limit value.
