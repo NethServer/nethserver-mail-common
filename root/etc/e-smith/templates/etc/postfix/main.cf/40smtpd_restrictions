@@ -4,7 +4,6 @@
 
 smtpd_client_restrictions = { join(",\n ", @smtpd_client_restrictions); }
 
-smtpd_helo_required = yes
 smtpd_helo_restrictions = { join(",\n ", @smtpd_helo_restrictions); }
 
 smtpd_sender_restrictions = { join(",\n ", @smtpd_sender_restrictions); }
