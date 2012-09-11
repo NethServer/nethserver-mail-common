@@ -19,8 +19,15 @@ my $configDb = esmith::ConfigDB->open_ro() || die('Could not open Config DB');
 my @postmapList = split(',', $configDb->get_prop('postfix', 'PostmapUpdateList'));
 
 foreach my $db (@postmapList) {
+
+    # prepend /etc/postfix to relative paths:
+    if($db !~ qr|^/|) {
+	$db = '/etc/postfix/' . $db;
+    }
+
     if( -r $db ) {
 	system('/usr/sbin/postmap', $db);
+	print "postmap ". $db ."\n";
     } else {
 	warn "Postfix database table $db seems to be missing..\n";
     }
