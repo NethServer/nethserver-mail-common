@@ -27,7 +27,6 @@ foreach my $db (@postmapList) {
 
     if( -r $db ) {
 	system('/usr/sbin/postmap', $db);
-	print "postmap ". $db ."\n";
     } else {
 	warn "Postfix database table $db seems to be missing..\n";
     }
