@@ -1,0 +1,8 @@
+#
+# 40verify_database
+#
+address_verify_map = hash:${data_directory}/verify
+address_verify_negative_cache = yes
+address_verify_negative_expire_time = 30m
+
+
