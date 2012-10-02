@@ -9,11 +9,13 @@
     push @smtpd_public_options, qw(content_filter=amavisd:[127.0.0.1]:10024
                                    receive_override_options=no_address_mappings);
 
+    push @submission_smtpd_options, 'content_filter=amavisd:[127.0.0.1]:10587';
+
     my $maxProcesses = $amavisd{MaxProcesses} > 2 ? $amavisd{MaxProcesses} : 2;
 
 $OUT = <<EOF;
 #
-# 50amavisd-after-queue -- message transport to amavisd-new filter
+# 30amavisd-after-queue -- message transport to amavisd-new filter
 #
 amavisd   unix  -       -       n        -      $maxProcesses     lmtp
     -o lmtp_data_done_timeout=1200

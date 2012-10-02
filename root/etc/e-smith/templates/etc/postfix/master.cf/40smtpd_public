@@ -2,7 +2,7 @@
 # 40smtpd_public -- public smtp server on port 25
 #
 
-smtp      inet  n       -       n       -       { $postfix{ConnectionsLimit} > 0 ? $postfix{ConnectionsLimit} : '-'; }       smtpd
+smtp      inet  n       -       n       -       { $postfix{ConnectionsLimitPerIp} && $postfix{ConnectionsLimit} > 0 ? $postfix{ConnectionsLimit} : '-'; }       smtpd
 {
     $OUT = join("\n", map { "  -o " . $_ } @smtpd_public_options);
 }
