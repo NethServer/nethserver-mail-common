@@ -7,12 +7,11 @@
 # See COPYING for licensing informations
 #
 
-use strict;
 use NethServer::Service;
-
+use strict;
 
 my @services = ('postfix', 'amavisd');
 
-NethServer::Service::manage_add('nethserver-mail-common',
-				@services);
+NethServer::Service::manage_remove('nethserver-mail-common',
+				   @services);
 

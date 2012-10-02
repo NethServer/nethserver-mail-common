@@ -67,3 +67,14 @@ foreach (qw(create modify delete)) {
     event_actions('domain-'   . $_, 'nethserver-mail-postmap-update' => '30');
     event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'restart');
 }
+
+
+#
+# UNINSTALL event
+#
+event_actions('nethserver-mail-common-uninstall',
+	      'nethserver-mail-common-uninstall' => '02',
+	      'firewall-adjust' => '40',
+	      'runlevel-adjust' => '50');
+
+
