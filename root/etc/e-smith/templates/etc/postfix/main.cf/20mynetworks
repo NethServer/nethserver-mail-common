@@ -2,7 +2,17 @@
 # 20mynetworks
 #
 
-# Only the local host is considered trusted by default
-mynetworks_style = host
+mynetworks = {
+    use esmith::NetworksDB;
+    use esmith::util;
+
+    my $ndb = esmith::NetworksDB->open_ro();
+
+    join(",\n ", map {
+	my ($addr, $mask) = split('/', $_);
+	esmith::util::computeLocalNetworkShortSpec($addr, $mask || '255.255.255.255');
+    } $ndb->local_access_spec());
+    
+}
 
 
