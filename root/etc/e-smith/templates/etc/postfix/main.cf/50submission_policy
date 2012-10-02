@@ -1,0 +1,13 @@
+#
+# 50submission_policy -- restrictions that are applied to submission 
+# and smtps TCP ports
+#
+
+submission_client_policy = 
+ { join ",\n ", @submission_client_restrictions; }
+
+submission_recipient_policy = 
+ { join ",\n ", @submission_recipient_restrictions; }
+
+
+

@@ -1,0 +1,8 @@
+#
+# 60main_switches -- Anti-virus, anti-spam bypass:
+#
+
+{ $amavisd{VirusCheckStatus} eq 'enabled' ? '# ' : ''}@bypass_virus_checks_maps = (1);  # controls running of anti-virus code
+{ $amavisd{SpamCheckStatus} eq 'enabled' ? '# ' : ''}@bypass_spam_checks_maps  = (1);  # controls running of anti-spam code
+
+

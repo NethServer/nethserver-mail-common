@@ -11,6 +11,7 @@ my @templates = qw(
     /etc/postfix/sasl_passwd
     /etc/postfix/tls_policy
     /etc/postfix/vmailbox
+    /etc/postfix/submission_whitelist
 );
 
 #

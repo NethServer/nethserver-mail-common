@@ -1,0 +1,22 @@
+#
+# 60networks -- the list of trusted networks.  See amavisd.conf-sample for details.
+#
+@mynetworks_maps = ( {
+
+   use esmith::NetworksDB;
+
+   @networkList = map {
+       (my $addr, $mask) = split('/', $_);
+       esmith::util::computeLocalNetworkShortSpec($addr, $mask ? $mask : '255.255.255.255');
+   } esmith::NetworksDB->open_ro()->local_access_spec();
+
+   Dumper([@networkList]);
+
+} );
+
+$policy_bank\{'MYNETS'\} = \{   # mail originating from @mynetworks
+  originating => 1,  # is true in MYNETS by default, but let's make it explicit
+  os_fingerprint_method => undef,  # don't query p0f for internal clients
+\};
+
+

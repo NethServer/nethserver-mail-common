@@ -1,1 +1,1 @@
-sasl_passwd,tls_policy,transport,vmailbox
+sasl_passwd,tls_policy,transport,vmailbox,submission_whitelist

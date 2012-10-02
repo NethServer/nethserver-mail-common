@@ -27,5 +27,34 @@
 
     @virtual_mailbox_domains = ();
 
+
+    # Submission ports policy (empty).
+
+    @submission_client_restrictions = (
+	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'reject'				       
+    );
+
+    @submission_recipient_restrictions = (
+	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'reject_unauth_destination'
+    );
+
+
+    if($postfix{SubmissionPolicyType} eq 'localnetworks') {
+
+	#
+	# Default submission ports restrictions: local clients can submit messagges.
+	#
+
+        @submission_client_restrictions = map { 
+	    $_ eq 'reject' ? ('permit_mynetworks',  $_) : $_ 
+	} @submission_client_restrictions;
+
+        @submission_recipient_restrictions = map {
+	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
+	} @submission_recipient_restrictions;
+    }
+    
     '';
 }

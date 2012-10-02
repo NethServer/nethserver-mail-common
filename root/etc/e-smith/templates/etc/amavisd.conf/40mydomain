@@ -1,0 +1,11 @@
+#
+# 40mydomain -- a convenient default value
+#
+
+$mydomain = {
+   my $mydomain = $domainList[0] ? $domainList[0] : `hostname -d`;
+   chomp($mydomain);
+   Dumper($mydomain);
+};
+
+

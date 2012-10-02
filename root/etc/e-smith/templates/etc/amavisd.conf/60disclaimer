@@ -1,0 +1,8 @@
+#
+# 40disclaimer -- see amavisd-new-2.5.0 release notes
+#
+$defang_maps_by_ccat\{+CC_CATCHALL\} = [ 'disclaimer' ];
+@altermime_args_disclaimer = qw(--disclaimer=/etc/_OPTION_.txt --disclaimer-html=/etc/_OPTION_.html);
+@disclaimer_options_bysender_maps = ( \{ '.' => 'altermime-disclaimer' \} );
+
+

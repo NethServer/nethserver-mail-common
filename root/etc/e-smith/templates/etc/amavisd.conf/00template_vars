@@ -1,0 +1,14 @@
+{
+     # Warning! This template expands to PERL code. Code outside unquoted curly braces
+     # is the template output, and as such is not executed by the expand-template command
+
+     use Data::Dumper;
+     use esmith::util;
+     $Data::Dumper::Terse = 1;
+     $Data::Dumper::Indent = 0;
+     '';
+}
+
+use strict;
+
+
