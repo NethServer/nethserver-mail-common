@@ -11,5 +11,5 @@ use strict;
 use NethServer::Service;
 
 NethServer::Service::manage_add('nethserver-mail-common',
-				'postfix');
+				'postfix', 'amavisd');
 

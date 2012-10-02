@@ -18,7 +18,10 @@ my @templates = qw(
 # UPDATE event
 #
 
-event_templates('nethserver-mail-common-update', @templates);
+event_templates('nethserver-mail-common-update', 
+		@templates,
+		'/etc/amavisd.conf'
+    );
 
 event_actions('nethserver-mail-common-update',
 	      'initialize-default-databases' => '00',
@@ -28,7 +31,9 @@ event_actions('nethserver-mail-common-update',
 	      'runlevel-adjust' => '40');
 
 event_services('nethserver-mail-common-update',
-	       'postfix' => 'restart');
+	       'postfix' => 'restart', 
+	       'amavisd' => 'restart'
+    );
 
 
 
@@ -54,10 +59,11 @@ my @domainTemplates = qw(
     /etc/postfix/transport
     /etc/postfix/vmailbox
     /etc/postfix/virtual
+    /etc/amavisd.conf
 );
 
 foreach (qw(create modify delete)) {
     event_templates('domain-' . $_, @domainTemplates);
     event_actions('domain-'   . $_, 'nethserver-mail-postmap-update' => '30');
-    event_services('domain-'  . $_, 'postfix' => 'reload');
+    event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'restart');
 }
