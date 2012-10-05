@@ -27,6 +27,7 @@
 
     # Filter for public listener:
     push @smtpd_public_options, 'smtpd_proxy_filter=127.0.0.1:10024';
+
     $OUT .= '127.0.0.1:10025 inet n  -       n       -        -      smtpd' . $smtpdAfterFilterOptions;
 
     # Filter for submission listeners:
