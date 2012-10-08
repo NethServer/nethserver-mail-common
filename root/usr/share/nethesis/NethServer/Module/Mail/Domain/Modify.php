@@ -33,6 +33,8 @@ use Nethgui\Controller\Table\Modify as Table;
  */
 class Modify extends \Nethgui\Controller\Table\Modify
 {
+    const DISCLAIMER_MAX_LENGTH = 2048;
+    const DISCLAIMER_PATH = '/var/lib/nethserver/mail-disclaimers/';
 
     public function initialize()
     {
@@ -40,12 +42,43 @@ class Modify extends \Nethgui\Controller\Table\Modify
             array('domain', Validate::HOSTNAME_FQDN, Table::KEY),
             array('Description', Validate::ANYTHING, Table::FIELD),
             array('TransportType', Validate::ANYTHING, Table::FIELD),
+            array('DisclaimerStatus', Validate::SERVICESTATUS, Table::FIELD),
         );
+
+        $this->declareParameter('DisclaimerText', $this->createValidator()->maxLength(self::DISCLAIMER_MAX_LENGTH), $this->getPlatform()->getMapAdapter(
+                array($this, 'readDisclaimerFile'), array($this, 'writeDisclaimerFile'), array()
+            ));
 
         $this->setSchema($parameterSchema);
         $this->setDefaultValue('TransportType', 'Relay');
 
         parent::initialize();
+    }
+
+    public function readDisclaimerFile()
+    {
+        if ( ! isset($this->parameters['domain'])) {
+            return '';
+        }
+
+        $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'] . '.txt';
+        $value = $this->getPhpWrapper()->file_get_contents($fileName, FALSE, NULL, -1, self::DISCLAIMER_MAX_LENGTH);
+
+        if ($value === FALSE) {
+            $value = '';
+        }
+
+        return $value;
+    }
+
+    public function writeDisclaimerFile($value)
+    {
+        $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'] . '.txt';
+        $retval = $this->getPhpWrapper()->file_put_contents($fileName, $value);
+        if ($retval === FALSE) {
+            $this->getLog()->error(sprintf('%s: file_put_contents failed to write data to %s', __CLASS__, $fileName));
+        }
+        return TRUE;
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)

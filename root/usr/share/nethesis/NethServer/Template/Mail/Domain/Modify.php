@@ -1,5 +1,7 @@
 <?php
 
+
+/* @var $view \Nethgui\Renderer\WidgetFactoryInterface */
 $view->requireFlag($view::INSET_FORM);
 
 if ($view->getModule()->getIdentifier() == 'update') {
@@ -31,5 +33,10 @@ foreach ($view['PlugTransport'] as $pluginView) {
 }
 
 echo $transportPanel;
+
+echo $view->fieldsetSwitch('DisclaimerStatus', 'enabled', $view::FIELDSETSWITCH_EXPANDABLE | $view::FIELDSETSWITCH_CHECKBOX)
+    ->setAttribute('uncheckedValue', 'disabled')
+    ->insert($view->textArea('DisclaimerText', $view::LABEL_NONE)->setAttribute('dimensions', '10x40'));
+
 
 echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP | $view::BUTTON_CANCEL);

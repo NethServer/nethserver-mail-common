@@ -8,3 +8,5 @@ $L['TransportType_Reject_label'] = 'Reject';
 $L['TransportType_Relay_label'] = 'Relay to another server';
 
 $L['Key_label'] = 'Domain';
+
+$L['DisclaimerStatus_label'] = 'Append a legal note to sent messages';

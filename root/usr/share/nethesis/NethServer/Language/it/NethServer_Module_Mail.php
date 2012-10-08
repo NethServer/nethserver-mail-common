@@ -26,3 +26,5 @@ $L['SmartHostPassword_label'] = 'Password';
 $L['SmartHostTlsStatus_label'] = 'Consenti connessione non cifrata';
 
 $L['Key_label'] = 'Dominio';
+
+$L['DisclaimerStatus_label'] = 'Aggiungi una nota legale in calce ai messaggi inviati';
