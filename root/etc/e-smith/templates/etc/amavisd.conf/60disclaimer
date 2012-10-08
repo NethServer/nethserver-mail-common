@@ -1,8 +1,22 @@
 #
-# 40disclaimer -- see amavisd-new-2.5.0 release notes
+# 60disclaimer -- see amavisd-new-2.5.0 release notes
 #
 $defang_maps_by_ccat\{+CC_CATCHALL\} = [ 'disclaimer' ];
-@altermime_args_disclaimer = qw(--disclaimer=/etc/_OPTION_.txt --disclaimer-html=/etc/_OPTION_.html);
-@disclaimer_options_bysender_maps = ( \{ '.' => 'altermime-disclaimer' \} );
+@altermime_args_disclaimer = qw(--disclaimer=_OPTION_.txt --disclaimer-html=_OPTION_.html);
+@disclaimer_options_bysender_maps = ( {
+    use esmith::DomainsDB;
+
+    $domainsDb = esmith::DomainsDB->open_ro() || die("Could not open DomainsDB");
+
+    my $baseDir = '/var/lib/nethserver/mail-disclaimers/';
+
+    my @enabledDomains =  grep { 
+	my $disclaimerStatus = $domainsDb->get_prop($_, 'DisclaimerStatus'); 
+	defined $disclaimerStatus && $disclaimerStatus eq 'enabled' ? $_ : undef;  
+    } @domainList;
+
+    my %disclaimerMap = map { $_ => $baseDir . $_  } @enabledDomains;
+    Dumper(\%disclaimerMap);
+} );
 
 

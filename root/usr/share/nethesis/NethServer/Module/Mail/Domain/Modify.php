@@ -74,7 +74,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
     public function writeDisclaimerFile($value)
     {
         $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'] . '.txt';
-        $retval = $this->getPhpWrapper()->file_put_contents($fileName, $value);
+        $retval = $this->getPhpWrapper()->file_put_contents($fileName, trim($value) . "\n");
         if ($retval === FALSE) {
             $this->getLog()->error(sprintf('%s: file_put_contents failed to write data to %s', __CLASS__, $fileName));
         }
