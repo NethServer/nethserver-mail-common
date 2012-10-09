@@ -61,7 +61,7 @@ class Modify extends \Nethgui\Controller\Table\Modify
             return '';
         }
 
-        $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'] . '.txt';
+        $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'] . '.raw';
         $value = $this->getPhpWrapper()->file_get_contents($fileName, FALSE, NULL, -1, self::DISCLAIMER_MAX_LENGTH);
 
         if ($value === FALSE) {
@@ -73,12 +73,59 @@ class Modify extends \Nethgui\Controller\Table\Modify
 
     public function writeDisclaimerFile($value)
     {
-        $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'] . '.txt';
-        $retval = $this->getPhpWrapper()->file_put_contents($fileName, trim($value) . "\n");
-        if ($retval === FALSE) {
-            $this->getLog()->error(sprintf('%s: file_put_contents failed to write data to %s', __CLASS__, $fileName));
+
+        $fileName = self::DISCLAIMER_PATH . $this->parameters['domain'];
+
+        // Prepare the RAW value
+        $valueRaw = trim($value) . "\n";
+        $retvalRaw = $this->getPhpWrapper()->file_put_contents($fileName . '.raw', $valueRaw);
+        if ($retvalRaw === FALSE) {
+            $this->getLog()->error(sprintf('%s: file_put_contents failed to write data to %s', __CLASS__, $fileName . '.raw'));
+            return FALSE;
         }
+
+        // Prepare ASCII encoding, prepending an empty line
+        $valueTxt = "\n" . $this->transliterateLatin($valueRaw);
+        $valueTxt = wordwrap($valueRaw);
+        $valueTxt = \iconv('UTF-8', 'ASCII//TRANSLIT', $valueTxt);
+        $retvalTxt = $this->getPhpWrapper()->file_put_contents($fileName . '.txt', $valueTxt);
+        if ($retvalTxt === FALSE) {
+            $this->getLog()->error(sprintf('%s: file_put_contents failed to write data to %s', __CLASS__, $fileName . '.txt'));
+            return FALSE;
+        }
+
+        // Prepare HTML encoding, prepending a line-break
+        $wikiText = new \NethServer\Tool\WikiText();
+        $valueHtml = "  \n" . htmlentities($valueRaw, ENT_COMPAT, 'UTF-8');
+        $valueHtml = wordwrap($valueHtml, 60);
+        $valueHtml = $wikiText->convert($valueHtml);
+        $retvalHtml = $this->getPhpWrapper()->file_put_contents($fileName . '.html', $valueHtml);
+        if ($retvalHtml === FALSE) {
+            $this->getLog()->error(sprintf('%s: file_put_contents failed to write data to %s', __CLASS__, $fileName . '.html'));
+            return FALSE;
+        }
+
         return TRUE;
+    }
+
+    private function transliterateLatin($text)
+    {
+        static $transTable = array(
+        'à' => 'a\'',
+        'è' => 'e\'',
+        'é' => 'e\'',
+        'ì' => 'i\'',
+        'ò' => 'o\'',
+        'ù' => 'u\'',
+        'À' => 'A\'',
+        'È' => 'E\'',
+        'É' => 'E\'',
+        'Ì' => 'I\'',
+        'Ò' => 'O\'',
+        'Ù' => 'U\'',
+        );
+
+        return strtr($text, $transTable);
     }
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
