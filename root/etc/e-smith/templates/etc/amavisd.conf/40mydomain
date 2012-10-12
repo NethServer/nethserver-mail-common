@@ -3,9 +3,8 @@
 #
 
 $mydomain = {
-   my $mydomain = $domainList[0] ? $domainList[0] : `hostname -d`;
-   chomp($mydomain);
-   Dumper($mydomain);
+    my $mydomain = $domainList[0] ? $domainList[0] : ($DomainName || 'localdomain');
+    Dumper($mydomain);
 };
 
 
