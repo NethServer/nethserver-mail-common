@@ -139,9 +139,27 @@ class Modify extends \Nethgui\Controller\Table\Modify
         $view->setTemplate($templates[$this->getIdentifier()]);
     }
 
-    public function onParametersSaved($changedParameters)
+    /**
+     * Delete the record after the event has been successfully completed
+     * @param string $key
+     */
+    protected function processDelete($key)
     {
-        if ($this->getIdentifier() === 'update') {
+        $accountDb = $this->getPlatform()->getDatabase('domains');
+        $accountDb->setType($key, 'domain-deleted');
+        $deleteProcess = $this->getPlatform()->signalEvent('domain-delete', array($key));
+        if ($deleteProcess->getExitCode() === 0) {
+            parent::processDelete($key);
+        }
+    }
+
+    protected function onParametersSaved($changedParameters)
+    {
+        if ($this->getIdentifier() === 'delete') {
+            // delete case is handled in "processDelete()" method:
+            // signalEvent() is invoked there.
+            return;
+        } elseif ($this->getIdentifier() === 'update') {
             $event = 'modify';
         } else {
             $event = $this->getIdentifier();
