@@ -1,4 +1,8 @@
 {
+    #
+    # 00template_vars
+    #
+
     use esmith::DomainsDB;
     $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
 
@@ -56,5 +60,8 @@
 	} @submission_recipient_restrictions;
     }
     
+    # Pluggable relay domain list (refs #1516) expanded in 40relay_domains fragment:
+    @relay_domains = ();
+
     '';
 }

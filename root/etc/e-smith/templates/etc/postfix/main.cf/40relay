@@ -1,5 +1,9 @@
 {
-    my @domainList = ();
+    #
+    # 40relay
+    #
+
+    my @domainList = @relay_domains;
 
     foreach my $domainRecord ($domainsDb->get_all_by_prop(type => 'domain')) {
 	if($domainRecord->prop('TransportType') eq 'Relay') {
@@ -18,10 +22,8 @@
 HEADER
 	
     if($status eq 'enabled') {
-	$OUT .= 'relay_domains = ' .  $domains;
+	$OUT .= 'relay_domains = ' .  $domains . "\n\n\n";
     }
 
     return $OUT;
 }
-
-
