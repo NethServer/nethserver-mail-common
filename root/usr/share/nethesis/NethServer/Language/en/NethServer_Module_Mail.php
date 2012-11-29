@@ -3,7 +3,8 @@
 $L['${0} day'] = '${0} day'; 
 $L['${0} days'] = '${0} days'; 
 $L['Create a new domain'] = 'Create a new domain'; 
-$L['DisclaimerStatus_label'] = 'Append a legal note to sent messages'; 
+$L['DisclaimerStatus_label'] = 'Append a legal note to sent messages';
+$L['DisclaimerText_label'] = '';
 $L['Domain_Title'] = 'Domains'; 
 $L['Key_label'] = 'Domain'; 
 $L['Mail_Description'] = 'Change mail configuration'; 
@@ -14,6 +15,7 @@ $L['Messages to domain ${0}'] = 'Messages @${0}';
 $L['Messages to this domain'] = 'Messages to this domain'; 
 $L['Queue message lifetime (${0})'] = 'Queue message lifetime (${0})'; 
 $L['Queue message max size (${0})'] = 'Queue message max size (${0})'; 
+$L['RelayHost_label'] = 'Relay host';
 $L['SmartHostName_label'] = 'Hostname'; 
 $L['SmartHostPassword_label'] = 'Password'; 
 $L['SmartHostPort_label'] = 'Port'; 
