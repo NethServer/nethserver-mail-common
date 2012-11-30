@@ -121,7 +121,8 @@ class MailQueueAdapter implements \ArrayAccess, \Nethgui\Adapter\AdapterInterfac
 
     private function lazyInitialization()
     {
-        $data = json_decode($this->getPlatform()->exec('/usr/bin/sudo /usr/bin/mailq | /usr/libexec/nethserver/mailq2json')->getOutput(), TRUE);
+        error_log('postqueue print');
+        $data = json_decode($this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -p | /usr/libexec/nethserver/mailq2json')->getOutput(), TRUE);
 
         $this->data = new \ArrayObject();
 
@@ -135,8 +136,8 @@ class MailQueueAdapter implements \ArrayAccess, \Nethgui\Adapter\AdapterInterfac
                 'Status' => $message['status'],
                 'Size' => $this->formatSize($message['size']),
                 'Timestamp' => $message['time'],
-                'Recipients' => implode(', ', array_slice($recipients, 0, 3)),
-                'RecipientsCount' => count($recipients),
+                'Recipients' => $recipients,
+                'RecipientsCount' => (string) count($recipients),
                 'Problems' => array_keys($message['reasons'])
             );
 

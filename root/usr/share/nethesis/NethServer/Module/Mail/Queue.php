@@ -33,23 +33,42 @@ class Queue extends \Nethgui\Controller\TableController
 
     public function initialize()
     {
-        $adapter = new Queue\MailQueueAdapter($this->getPlatform());
-
         $columns = array(
             'Id',
-            'Recipients',
-            'RecipientsCount',
-            'Timestamp',
             'Sender',
-            'Size'
+            'Size',
+            'Timestamp',
+            'Recipients',
         );
 
         $this
-            ->setTableAdapter($adapter)
+            ->setTableAdapter(new Queue\MailQueueAdapter($this->getPlatform()))
             ->setColumns($columns)
+            ->addTableAction(new Queue\Flush())
+            ->addTableAction(new Queue\Refresh())
         ;
 
         parent::initialize();
+    }
+
+    public function prepareViewForColumnId(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
+    {
+        $rowMetadata['rowCssClass'] .= ' valign-top padicon';
+        if ($values['Status'] === 'HOLD') {
+            $rowMetadata['rowCssClass'] = trim($rowMetadata['rowCssClass'] . ' locked');
+        } elseif($values['Status'] === 'ACTIVE') {
+            $rowMetadata['rowCssClass'] = trim($rowMetadata['rowCssClass'] . ' sync');
+        }
+        return $values['Id'];
+    }
+
+    public function prepareViewForColumnRecipients(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
+    {
+        $recipients = $values['Recipients'];
+        if (count($recipients) <= 3) {
+            return implode(', ', $recipients);
+        }
+        return implode(', ', array_merge(array_slice($recipients, 0, 2), array($view->translate('AndXMore', array(count($recipients) - 2)))));
     }
 
 }
