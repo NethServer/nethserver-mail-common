@@ -1,0 +1,9 @@
+{
+    #
+    # 20postqueue
+    #
+    push @cmnd_alias_httpd_admin, qw(
+         /usr/sbin/postqueue
+    );
+    '';
+}

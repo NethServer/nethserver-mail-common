@@ -19,9 +19,10 @@ my @templates = qw(
 #
 
 event_templates('nethserver-mail-common-update', 
-		@templates,
-		'/etc/amavisd.conf'
-    );
+		@templates, qw(
+		/etc/sudoers
+		/etc/amavisd.conf
+));
 
 event_actions('nethserver-mail-common-update',
 	      'initialize-default-databases' => '00',
@@ -34,8 +35,6 @@ event_services('nethserver-mail-common-update',
 	       'postfix' => 'restart', 
 	       'amavisd' => 'restart'
     );
-
-
 
 #
 # SAVE event
