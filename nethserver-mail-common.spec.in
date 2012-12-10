@@ -1,0 +1,54 @@
+Summary: Common configuration for mail packages
+Name: nethserver-mail-common
+Version: @@VERSION@@
+Release: @@RELEASE@@%{?dist}
+License: GPL
+URL: http://dev.nethesis.it/projects/%{name}
+Source0: %{name}-%{version}.tar.gz
+BuildArch: noarch
+
+Requires: postfix >= 2.6.6
+Requires: nethserver-base
+
+# amavisd-new is currently missing 
+# - perl-Convert-BinHex, (issues  a startup warning)
+# - /usr/sbin/tmpwatch command
+Requires: amavisd-new, perl-Convert-BinHex, tmpwatch
+
+BuildRequires: perl
+BuildRequires: nethserver-devtools 
+
+%description
+Common configuration for mail packages, based on Postfix.
+
+%prep
+%setup
+
+%build
+perl createlinks
+
+%install
+rm -rf $RPM_BUILD_ROOT
+(cd root; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
+%{genfilelist} $RPM_BUILD_ROOT > %{name}-%{version}-filelist
+echo "%doc COPYING" >> %{name}-%{version}-filelist
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post
+source /etc/nethserver/rpm_hook_functions
+event_queue add %{name}-update
+
+%preun
+source /etc/nethserver/rpm_hook_functions
+signal_event %{name}-uninstall
+
+%files -f %{name}-%{version}-filelist
+%defattr(-,root,root)
+
+
+%changelog
+* Thu Jun  7 2012 Davide Principi <davide.principi@nethesis.it> - 1.nh
+- Initial build.
+
