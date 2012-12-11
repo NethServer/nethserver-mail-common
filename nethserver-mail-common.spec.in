@@ -48,7 +48,7 @@ signal_event %{name}-uninstall
 %defattr(-,root,root)
 
 
+
+
 %changelog
-* Thu Jun  7 2012 Davide Principi <davide.principi@nethesis.it> - 1.nh
-- Initial build.
 
