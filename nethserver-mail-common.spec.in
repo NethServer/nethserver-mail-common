@@ -1,7 +1,7 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
 Version: @@VERSION@@
-Release: @@RELEASE@@%{?dist}
+Release: @@RELEASE@@
 License: GPL
 URL: http://dev.nethesis.it/projects/%{name}
 Source0: %{name}-%{version}.tar.gz
