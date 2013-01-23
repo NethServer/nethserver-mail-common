@@ -7,7 +7,7 @@ URL: http://dev.nethesis.it/projects/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Requires: postfix >= 2.6.6
+# nethserver-base requires postfix MTA:
 Requires: nethserver-base
 
 # amavisd-new is currently missing 
