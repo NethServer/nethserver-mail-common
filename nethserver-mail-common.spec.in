@@ -8,7 +8,7 @@ Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
 # nethserver-base requires postfix MTA:
-Requires: nethserver-base
+Requires: nethserver-base >= 1.1.0-2
 
 # amavisd-new is currently missing 
 # - perl-Convert-BinHex, (issues  a startup warning)
@@ -16,7 +16,7 @@ Requires: nethserver-base
 Requires: amavisd-new, perl-Convert-BinHex, tmpwatch
 
 BuildRequires: perl
-BuildRequires: nethserver-devtools 
+BuildRequires: nethserver-devtools >= 1.0.0
 
 %description
 Common configuration for mail packages, based on Postfix.
