@@ -1,0 +1,11 @@
+{
+    #
+    # 01mx_record -- push smtp, imap, pop, pop3 aliases
+    #
+
+    # Add DNS aliases only if acting as resolver:
+    if($dns{role} eq 'resolver' && $postfix{MxRecordStatus} eq 'enabled') {
+        push @hostnames, map { join('.', $_, $DomainName) } qw(smtp imap pop pop3);
+    }
+    '';
+}
