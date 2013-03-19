@@ -48,6 +48,10 @@ signal_event %{name}-uninstall
 %defattr(-,root,root)
 
 %changelog
+* Tue Mar 19 2013 Davide Principi <davide.principi@nethesis.it> - 1.1.0-1.ns6
+- MX record configuration. Refs #1725
+- *.spec: use url_prefix macro in URL tag; set minimum version requirements. Refs #1654 #1653
+
 * Thu Jan 31 2013 Davide Principi <davide.principi@nethesis.it> - 1.0.1-1.ns6
 - Postfix installation moved to nethserver-base . Refs #1635 -- admin's mailbox
 
