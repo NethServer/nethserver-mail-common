@@ -15,7 +15,10 @@ $defang_maps_by_ccat\{+CC_CATCHALL\} = [ 'disclaimer' ];
 	defined $disclaimerStatus && $disclaimerStatus eq 'enabled' ? $_ : undef;  
     } @domainList;
 
-    my %disclaimerMap = map { $_ => $baseDir . $_  } @enabledDomains;
+    my %disclaimerMap = ( 
+        '.' => $baseDir . '_default_', # The default empty disclaimer. Fixes #1819
+        map { $_ => $baseDir . $_  } @enabledDomains
+    );
     Dumper(\%disclaimerMap);
 } );
 
