@@ -44,23 +44,29 @@
 	'reject_unauth_destination'
     );
 
+    # Set the default submission policy
+    $submission_policy = 'localnetworks';
 
-    if($postfix{SubmissionPolicyType} eq 'localnetworks') {
+    # Hash of subroutines that manipulate submission_*_restrictions
+    # lists:
+    %submission_policies = ();
 
-	#
-	# Default submission ports restrictions: local clients can submit messagges.
-	#
-
-        @submission_client_restrictions = map { 
+    #
+    # Default submission ports restrictions: clients from mynetworks
+    # can submit messagges.
+    #   
+    $submission_policies{'localnetworks'} = sub {
+	@submission_client_restrictions = map { 
 	    $_ eq 'reject' ? ('permit_mynetworks',  $_) : $_ 
 	} @submission_client_restrictions;
 
-        @submission_recipient_restrictions = map {
+	@submission_recipient_restrictions = map {
 	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
-	} @submission_recipient_restrictions;
-    }
+	} @submission_recipient_restrictions;	    
+    };    
     
-    # Pluggable relay domain list (refs #1516) expanded in 40relay_domains fragment:
+    # Pluggable relay domain list (refs #1516) expanded in
+    # 40relay_domains fragment:
     @relay_domains = ();
 
     '';
