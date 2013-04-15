@@ -1,5 +1,5 @@
 #
-# 40smtpd_restrictions -- see 00template_vars fragment for default array settings..
+# 60smtpd_restrictions -- see 00template_vars fragment for default array settings..
 #
 
 smtpd_client_restrictions = { join(",\n ", @smtpd_client_restrictions); }
