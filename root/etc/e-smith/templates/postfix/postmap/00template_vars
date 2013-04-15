@@ -1,0 +1,15 @@
+{
+    #
+    # 00template_vars
+    #
+
+    @postmapList = qw(
+	sasl_passwd
+	tls_policy
+	transport
+	vmailbox
+	submission_whitelist
+    );
+
+    '';
+}
