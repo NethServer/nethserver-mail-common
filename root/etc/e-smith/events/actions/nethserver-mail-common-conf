@@ -21,13 +21,6 @@
 #
 
 use strict;
-use NethServer::Service;
-
-
-my @services = ('postfix', 'amavisd');
-
-NethServer::Service::manage_add('nethserver-mail-common',
-				@services);
 
 # Refs #1478 -- prepare persistent directory for mail disclaimers:
 my $disclaimerDir = '/var/lib/nethserver/mail-disclaimers';
