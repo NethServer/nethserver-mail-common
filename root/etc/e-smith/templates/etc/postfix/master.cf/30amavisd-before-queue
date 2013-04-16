@@ -3,8 +3,16 @@
     # 30amavisd-before-queue: configure public smtp server as amavisd proxy
     #
 
-    if($amavisd{ContentInspectionType} ne 'before-queue') {
+    if($content_inspection_type ne 'amavisd-before-queue') {
 	return '';
+    }
+
+    # Override default values from DB:
+    $connections_limit = int($postfix{ConnectionsLimit});
+    $connections_limit_per_ip = int($postfix{ConnectionsLimitPerIp});
+
+    if($connections_limit_per_ip > 0) {
+	push @smtpd_public_options, ('smtpd_client_connection_count_limit=' . $connections_limit_per_ip);
     }
 
     $OUT = q(#

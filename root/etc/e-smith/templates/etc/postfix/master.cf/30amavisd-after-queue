@@ -1,6 +1,6 @@
 {
 
-    if($amavisd{ContentInspectionType} ne 'after-queue') {
+    if($content_inspection_type ne 'amavisd-after-queue') {
 	return '';
     }
 

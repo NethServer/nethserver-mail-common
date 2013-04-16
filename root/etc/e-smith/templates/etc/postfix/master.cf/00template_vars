@@ -9,12 +9,6 @@
 	'strict_rfc821_envelopes=yes',
     );
 
-    # By default, the client connection count limit is set to half the
-    # default process limit value.
-    if($postfix{ConnectionsLimitPerIp} && $postfix{ConnectionsLimitPerIp} > 0) {
-	push @smtpd_public_options, 'smtpd_client_connection_count_limit=' . $postfix{ConnectionsLimitPerIp};
-    }
-
     # options for submission servers:
     @submission_smtpd_options = qw(
       smtpd_client_restrictions=$submission_client_policy
@@ -23,6 +17,20 @@
       smtpd_recipient_restrictions=$submission_recipient_policy
       strict_rfc821_envelopes=no
     );
+
+    # The default content inspection type:
+    if( ! $postfix{ContentInspectionType} || $postfix{ContentInspectionType} eq 'default') {
+	$content_inspection_type = 'amavisd-after-queue';
+    } else {
+	$content_inspection_type = $postfix{ContentInspectionType};
+    }
+
+    # The maximum number of smtpd processes spawned:
+    $connections_limit = 0;
+
+    # By default, the client connection count limit is set to half the
+    # default process limit value.
+    $connections_limit_per_ip = 0;
 
     '';
 }
