@@ -1,14 +1,25 @@
 {
-     # Warning! This template expands to PERL code. Code outside unquoted curly braces
-     # is the template output, and as such is not executed by the expand-template command
+    # Warning! This template expands to PERL code. Code outside unquoted curly braces
+    # is the template output, and as such is not executed by the expand-template command
 
-     use Data::Dumper;
-     use esmith::util;
-     $Data::Dumper::Terse = 1;
-     $Data::Dumper::Indent = 0;
-     '';
+    use Data::Dumper;
+    use esmith::util;
+    $Data::Dumper::Terse = 1;
+    $Data::Dumper::Indent = 0;
+    
+    # Control anti-virus and anti-spam checks:
+    $virus_check_status = 0;
+    $spam_check_status = 0;
+    
+    # The default content inspection type:
+    if( ! $postfix{ContentInspectionType} || $postfix{ContentInspectionType} eq 'default') {
+	$content_inspection_type = 'after-queue';
+    } else {
+	$content_inspection_type = $postfix{ContentInspectionType};
+    }
+    
+    '';
 }
 
 use strict;
-
 
