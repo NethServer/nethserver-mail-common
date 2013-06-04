@@ -39,4 +39,9 @@ $policy_bank\{'SUBMISSION'\} = \{
     allow_disclaimers => 1
 \};
 
+# Disable smtp connection cache, to avoid END-OF-MESSAGE timeout
+# (see #1968):
+$smtp_connection_cache_on_demand = 0;
+$smtp_connection_cache_enable = 0;
+
 
