@@ -44,6 +44,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Mon Jun 10 2013 Davide Principi <davide.principi@nethesis.it> - 1.2.1-1.ns6
+- Spawn more amavisd wokers #1908
+- Timeout after END-OF-MESSAGE from localhost #1968
+
 * Tue Apr 30 2013 Davide Principi <davide.principi@nethesis.it> - 1.2.0-1.ns6
 - Full automatic package install/upgrade/uninstall support #1870 #1872 #1874
 - Allow submission policy overriding in dependant packages and DB #1818 #1856
