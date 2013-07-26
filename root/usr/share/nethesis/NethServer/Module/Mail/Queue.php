@@ -42,7 +42,7 @@ class Queue extends \Nethgui\Controller\TableController
         );
 
         $this
-            ->setTableAdapter(new Queue\MailQueueAdapter($this->getPlatform()))
+            ->setTableAdapter(new \Nethgui\Adapter\LazyLoaderAdapter(array($this, 'readMailQueue')))
             ->setColumns($columns)
             ->addTableAction(new Queue\Flush())
             ->addTableAction(new Queue\Refresh())
@@ -69,6 +69,51 @@ class Queue extends \Nethgui\Controller\TableController
             return implode(', ', $recipients);
         }
         return implode(', ', array_merge(array_slice($recipients, 0, 2), array($view->translate('AndXMore', array(count($recipients) - 2)))));
+    }
+
+    public function readMailQueue()
+    {
+        $messages = json_decode($this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -p | /usr/libexec/nethserver/mailq2json')->getOutput(), TRUE);
+
+        $data = new \ArrayObject();
+
+        foreach ($messages as $message) {
+
+            $recipients = $this->getAllRecipients($message);
+
+            $row = array(
+                'Id' => $message['id'],
+                'Sender' => $message['sender'],
+                'Status' => $message['status'],
+                'Size' => $this->formatSize($message['size']),
+                'Timestamp' => $message['time'],
+                'Recipients' => $recipients,
+                'RecipientsCount' => (string) count($recipients),
+                'Problems' => array_keys($message['reasons'])
+            );
+
+            $data[$message['id']] = $row;
+        }
+
+        return $data;
+    }
+
+    private function getAllRecipients($message)
+    {
+        $recipients = $message['recipients'];
+        foreach ($message['reasons'] as $r) {
+            $recipients = array_merge($recipients, $r);
+        }
+        return $recipients;
+    }
+
+    private function formatSize($size)
+    {
+        $units = array(' B', ' KB', ' MB', ' GB', ' TB');
+        for ($i = 0; $size > 1024; $i ++ ) {
+            $size /= 1024;
+        }
+        return round($size, 2) . $units[$i];
     }
 
 }

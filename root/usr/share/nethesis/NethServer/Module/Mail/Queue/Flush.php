@@ -37,7 +37,6 @@ class Flush extends \Nethgui\Controller\Table\AbstractAction
     public function process()
     {
         if ($this->getRequest()->isMutation()) {
-            error_log('postqueue flush');
             $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -f');
         }
     }
