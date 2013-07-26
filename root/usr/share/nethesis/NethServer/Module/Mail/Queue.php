@@ -39,6 +39,7 @@ class Queue extends \Nethgui\Controller\TableController
             'Size',
             'Timestamp',
             'Recipients',
+            'Actions',
         );
 
         $this
@@ -46,6 +47,7 @@ class Queue extends \Nethgui\Controller\TableController
             ->setColumns($columns)
             ->addTableAction(new Queue\Flush())
             ->addTableAction(new Queue\Refresh())
+            ->addRowAction(new Queue\Delete())
         ;
 
         parent::initialize();
@@ -56,7 +58,7 @@ class Queue extends \Nethgui\Controller\TableController
         $rowMetadata['rowCssClass'] .= ' valign-top padicon';
         if ($values['Status'] === 'HOLD') {
             $rowMetadata['rowCssClass'] = trim($rowMetadata['rowCssClass'] . ' locked');
-        } elseif($values['Status'] === 'ACTIVE') {
+        } elseif ($values['Status'] === 'ACTIVE') {
             $rowMetadata['rowCssClass'] = trim($rowMetadata['rowCssClass'] . ' sync');
         }
         return $values['Id'];

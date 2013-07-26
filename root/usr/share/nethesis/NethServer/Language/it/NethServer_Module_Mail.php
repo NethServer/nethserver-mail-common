@@ -2,7 +2,10 @@
 
 $L['${0} day'] = 'un giorno'; 
 $L['${0} days'] = '${0} giorni'; 
-$L['Create a new domain'] = 'Crea un nuovo dominio di posta'; 
+$L['Create a new domain'] = 'Crea un nuovo dominio di posta';
+$L['Delete_label'] = 'Elimina';
+$L['Delete_Header'] = 'Elimina il messaggio ${0}';
+$L['Delete_Message'] = 'Confermi l\'eliminazione del messaggio ${0}?';
 $L['DisclaimerStatus_label'] = 'Aggiungi una nota legale in calce ai messaggi inviati';
 $L['DisclaimerText_label'] = ''; 
 $L['Domain_Title'] = 'Domini'; 

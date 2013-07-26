@@ -28,9 +28,16 @@ namespace NethServer\Module\Mail\Queue;
  */
 class Refresh extends \Nethgui\Controller\Table\AbstractAction
 {
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->setViewTemplate(FALSE);
+    }
+
     public function nextPath()
     {
-        return 'read';
+        return '/Mail/Queue/read';
     }
 
 }

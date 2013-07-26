@@ -2,7 +2,10 @@
 
 $L['${0} day'] = '${0} day'; 
 $L['${0} days'] = '${0} days'; 
-$L['Create a new domain'] = 'Create a new domain'; 
+$L['Create a new domain'] = 'Create a new domain';
+$L['Delete_label'] = 'Delete';
+$L['Delete_Header'] = 'Delete message ${0}';
+$L['Delete_Message'] = 'Confirm deletion of message ${0}?';
 $L['DisclaimerStatus_label'] = 'Append a legal note to sent messages';
 $L['DisclaimerText_label'] = '';
 $L['Domain_Title'] = 'Domains'; 

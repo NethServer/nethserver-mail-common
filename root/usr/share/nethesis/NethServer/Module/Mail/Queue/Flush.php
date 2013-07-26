@@ -53,9 +53,14 @@ class Flush extends \Nethgui\Controller\Table\AbstractAction
     {
         parent::prepareView($view);
         $view['messageCount'] = $this->messageCount;
+    }
+
+    public function nextPath()
+    {
         if ($this->getRequest()->isMutation()) {
-            $view->getCommandList()->sendQuery($view->getModuleUrl('../read') . '?deferred=1', 3000, TRUE);
+            return '/Mail/Queue/read';
         }
+        return parent::nextPath();
     }
 
 }
