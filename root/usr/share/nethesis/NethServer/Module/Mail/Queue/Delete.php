@@ -68,21 +68,11 @@ class Delete extends \Nethgui\Controller\Table\RowAbstractAction
             $process = $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postsuper -d ${1}', array(1 => $keyValue));
             if ($process->getExitCode() != 0) {
                 $this->getLog()->error(sprintf("%s: postsuper -d %s command failed - %s", __CLASS__, $keyValue, $process->getOutput()));
-            } else {
-                $this->getLog()->error(sprintf("%s: postsuper -d %s command OK - %s", __CLASS__, $keyValue, $process->getOutput()));
             }
         } else {
             parent::process();
         }
     }
-
-//    public function prepareView(\Nethgui\View\ViewInterface $view)
-//    {
-//        parent::prepareView($view);
-//        if ($this->getRequest()->isMutation()) {
-//            $view->getCommandList()->sendQuery($view->getModuleUrl('../read') . '?deferred=1', 100, TRUE);
-//        }
-//    }
 
     public function nextPath()
     {

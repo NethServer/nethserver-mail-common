@@ -76,7 +76,14 @@ class Queue extends \Nethgui\Controller\TableController
 
     public function readMailQueue()
     {
-        $messages = json_decode($this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -p | /usr/libexec/nethserver/mailq2json')->getOutput(), TRUE);
+        $messages = array();
+
+        $process = $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -p | /usr/libexec/nethserver/mailq2json');
+        if ($process->getExitCode() == 0) {
+            $messages = json_decode($process->getOutput(), TRUE);
+        } else {
+            $this->getLog()->error(sprintf("%s: postqueue -f command failed - %s", __CLASS__, $process->getOutput()));
+        }
 
         $data = new \ArrayObject();
 

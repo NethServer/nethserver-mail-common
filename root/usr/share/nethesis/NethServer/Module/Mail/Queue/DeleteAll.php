@@ -37,7 +37,10 @@ class DeleteAll extends \Nethgui\Controller\Table\AbstractAction
     public function process()
     {
         if ($this->getRequest()->isMutation()) {
-            $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postsuper -d ALL');
+            $process = $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postsuper -d ALL');
+            if ($process->getExitCode() != 0) {
+                $this->getLog()->error(sprintf("%s: postsuper -d ALL command failed - %s", __CLASS__, $process->getOutput()));
+            }
         }
     }
 

@@ -37,7 +37,10 @@ class Flush extends \Nethgui\Controller\Table\AbstractAction
     public function process()
     {
         if ($this->getRequest()->isMutation()) {
-            $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -f');
+            $process = $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -f');
+            if ($process->getExitCode() != 0) {
+                $this->getLog()->error(sprintf("%s: postqueue -f command failed - %s", __CLASS__, $process->getOutput()));
+            }
         }
     }
 
