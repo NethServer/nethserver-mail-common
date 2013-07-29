@@ -21,12 +21,12 @@ namespace NethServer\Module\Mail\Queue;
  */
 
 /**
- * Flush mail queue, trying to deliver all queued messages
+ * Delete all messages in Postfix queues
  *
  * @author Davide Principi <davide.principi@nethesis.it>
  * @since 1.0
  */
-class Flush extends \Nethgui\Controller\Table\AbstractAction
+class DeleteAll extends \Nethgui\Controller\Table\AbstractAction
 {
     /**
      *
@@ -37,7 +37,7 @@ class Flush extends \Nethgui\Controller\Table\AbstractAction
     public function process()
     {
         if ($this->getRequest()->isMutation()) {
-            $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postqueue -f');
+            $this->getPlatform()->exec('/usr/bin/sudo /usr/sbin/postsuper -d ALL');
         }
     }
 

@@ -45,8 +45,9 @@ class Queue extends \Nethgui\Controller\TableController
         $this
             ->setTableAdapter(new \Nethgui\Adapter\LazyLoaderAdapter(array($this, 'readMailQueue')))
             ->setColumns($columns)
-            ->addTableAction(new Queue\Flush())
             ->addTableAction(new Queue\Refresh())
+            ->addTableAction(new Queue\Flush())
+            ->addTableAction(new Queue\DeleteAll())
             ->addRowAction(new Queue\Delete())
         ;
 
