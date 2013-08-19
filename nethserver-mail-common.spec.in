@@ -13,7 +13,7 @@ Requires: nethserver-base >= 1.1.0-2
 # amavisd-new is currently missing 
 # - perl-Convert-BinHex, (issues  a startup warning)
 # - /usr/sbin/tmpwatch command
-Requires: amavisd-new, perl-Convert-BinHex, tmpwatch
+Requires: amavisd-new >= 2.8.0-4, perl-Convert-BinHex, tmpwatch
 
 BuildRequires: perl
 BuildRequires: nethserver-devtools >= 1.0.0
