@@ -1,0 +1,7 @@
+#
+# NOTE: This file is sourced by amavisd init script
+#
+
+# NethServer uses old config file path from RepoForge package
+prog_config_file="/etc/amavisd.conf"
+

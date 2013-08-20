@@ -5,8 +5,9 @@
 $max_servers = { $amavisd{MaxProcesses} > 2 ? $amavisd{MaxProcesses} : 2 };            # num of pre-forked children (2..30 is common), -m
 $daemon_user  = "amavis";     # (no default;  customary: vscan or amavis), -u
 $daemon_group = "amavis";     # (no default;  customary: vscan or amavis), -g
+$pid_file = "/var/run/amavisd/amavisd.pid";
 
-# $MYHOME = '/var/amavis';   # a convenient default for other settings, -H
+$MYHOME = '/var/spool/amavisd';     # a convenient default for other settings, -H
 $TEMPBASE = "$MYHOME/tmp";   # working directory, needs to exist, -T
 $ENV\{TMPDIR\} = $TEMPBASE;    # environment variable TMPDIR, used by SA, etc.
 
@@ -14,12 +15,9 @@ $db_home   = "$MYHOME/db";      # dir for bdb nanny/cache/snmp databases, -D
 
 $log_level = 0;              # verbosity 0..5, -d
 $log_recip_templ = undef;    # disable by-recipient level-0 log entries
-$DO_SYSLOG = 1;              # log via syslogd (preferred)
-$syslog_facility = 'mail';   # Syslog facility as a string
-           # e.g.: mail, daemon, user, local0, ... local7
-$syslog_priority = 'debug';  # Syslog base (minimal) priority as a string,
-           # choose from: emerg, alert, crit, err, warning, notice, info, debug
+$do_syslog = 1;              # log via syslogd (preferred)
 
+$enable_zmq = 0;
 $enable_db = 0;              # enable use of BerkeleyDB/libdb (SNMP and nanny)
 $enable_global_cache = 1;    # enable use of libdb-based cache if $enable_db=1
 $nanny_details_level = 2;    # nanny verbosity: 1: traditional, 2: detailed
