@@ -1,0 +1,10 @@
+#
+# 20postfix_tweaks
+#
+
+#
+# Refs #2108 -- Permanent error for non-existing recipients
+#
+unverified_recipient_reject_code = 550
+
+
