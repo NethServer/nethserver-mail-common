@@ -44,6 +44,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Mon Sep 02 2013 Davide Principi <davide.principi@nethesis.it> - 1.3.1-1.ns6
+- SMTP temporary error on non-existing recipients - Bug #2108 [NethServer]
+- amavisd-new 2.8.0 from EPEL - Enhancement #2093 [NethServer]
+
 * Mon Jul 29 2013 Davide Principi <davide.principi@nethesis.it> - 1.3.0-1.ns6
 - Mail-common: email queue management - Feature #2042 [NethServer]
 
