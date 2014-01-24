@@ -3,4 +3,5 @@
 #
 message_size_limit = { $postfix{MessageSizeMax}  }
 
+mailbox_size_limit = 0
 
