@@ -30,7 +30,9 @@ perl createlinks
 %install
 rm -rf $RPM_BUILD_ROOT
 (cd root; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
-%{genfilelist} $RPM_BUILD_ROOT > %{name}-%{version}-filelist
+%{genfilelist} $RPM_BUILD_ROOT \
+   --dir /var/lib/nethserver/mail-disclaimers 'attr(2775,root,adm)' \
+   > %{name}-%{version}-filelist
 echo "%doc COPYING" >> %{name}-%{version}-filelist
 
 %clean

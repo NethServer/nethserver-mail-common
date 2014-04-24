@@ -22,12 +22,4 @@
 
 use strict;
 
-# Refs #1478 -- prepare persistent directory for mail disclaimers:
-my $disclaimerDir = '/var/lib/nethserver/mail-disclaimers';
-if ( -d $disclaimerDir ) {
-    my $adminGid = (getpwnam('admin'))[3];
-    chmod 0775, $disclaimerDir;
-    chown -1, $adminGid, $disclaimerDir;
-} else {
-    warn 'Directory not found! ' . $disclaimerDir;
-}
+
