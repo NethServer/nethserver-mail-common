@@ -87,3 +87,9 @@ foreach (qw(create modify delete)) {
     event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'restart');
 }
 
+#
+# migration
+#
+event_actions('migration-import', qw(
+    nethserver-mail-migrate-smarthost      30
+));
