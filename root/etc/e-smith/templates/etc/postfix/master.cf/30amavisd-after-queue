@@ -17,6 +17,7 @@ amavisd   unix  -       -       n        -      $maxProcesses     lmtp
     -o lmtp_send_xforward_command=yes
     -o disable_dns_lookups=yes
     -o max_use=$maxProcesses
+    -o syslog_name=filter
 
 # Message re-injection path, for local clients (amavisd) only:
 127.0.0.1:10025 inet n    -       n       -       -     smtpd
@@ -38,6 +39,7 @@ amavisd   unix  -       -       n        -      $maxProcesses     lmtp
     -o receive_override_options=no_header_body_checks,no_unknown_recipient_checks,no_milters
     -o local_header_rewrite_clients=
     -o smtpd_authorized_xforward_hosts=127.0.0.0/8
+    -o syslog_name=queue
 
 EOF
 
