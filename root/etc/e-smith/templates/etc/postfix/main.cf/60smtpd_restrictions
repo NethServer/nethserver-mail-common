@@ -10,4 +10,6 @@ smtpd_sender_restrictions = { join(",\n ", @smtpd_sender_restrictions); }
 
 smtpd_recipient_restrictions = { join(",\n ", @smtpd_recipient_restrictions); }
 
+smtpd_relay_restrictions = { join(",\n ", @smtpd_relay_restrictions); }
+
 

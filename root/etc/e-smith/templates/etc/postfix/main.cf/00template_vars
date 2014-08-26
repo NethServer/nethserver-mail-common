@@ -23,6 +23,8 @@
 	'reject_unknown_sender_domain'
     );     
 
+    @smtpd_relay_restrictions = ();
+
     @smtpd_recipient_restrictions = (
         'reject_non_fqdn_recipient',
         'reject_unauth_destination',
@@ -31,9 +33,9 @@
 
     @virtual_mailbox_domains = ();
 
-
-    # Submission ports policy (empty).
-
+    #
+    # Submission policy
+    #
     @submission_client_restrictions = (
 	'check_client_access hash:/etc/postfix/submission_whitelist',
 	'reject'				       
@@ -52,8 +54,8 @@
     %submission_policies = ();
 
     #
-    # Default submission ports restrictions: clients from mynetworks
-    # can submit messagges.
+    # Default submission ports restrictions: clients from local networks
+    # can submit messages, even on port 25
     #   
     $submission_policies{'localnetworks'} = sub {
 	@submission_client_restrictions = map { 
@@ -63,11 +65,19 @@
 	@submission_recipient_restrictions = map {
 	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
 	} @submission_recipient_restrictions;	    
+
+	@smtpd_recipient_restrictions = map {
+	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
+	} @smtpd_recipient_restrictions;
+
+	$mynetworks_style = 'subnet';
     };    
     
     # Pluggable relay domain list (refs #1516) expanded in
     # 40relay_domains fragment:
     @relay_domains = ();
+
+    $mynetworks_style = '';
 
     '';
 }
