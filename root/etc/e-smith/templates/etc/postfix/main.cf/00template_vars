@@ -7,18 +7,21 @@
     $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
 
     # Restrictions default values. Parameter are expanded in
-    # 40smtpd_restrictions fragment
+    # 60smtpd_restrictions fragment
 
     @smtpd_client_restrictions = (
+	'check_client_access hash:/etc/postfix/submission_whitelist',
         'reject_unauth_pipelining'
     );
 
     @smtpd_helo_restrictions = (
+	'check_client_access hash:/etc/postfix/submission_whitelist',
 	'reject_invalid_helo_hostname',
 	'reject_non_fqdn_helo_hostname'
     );
 
     @smtpd_sender_restrictions = (
+	'check_client_access hash:/etc/postfix/submission_whitelist',
 	'reject_non_fqdn_sender',
 	'reject_unknown_sender_domain'
     );     
