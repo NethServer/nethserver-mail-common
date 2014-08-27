@@ -32,7 +32,7 @@ my @templates = qw(
     /etc/postfix/tls_policy
     /etc/postfix/vmailbox
     /etc/postfix/access
-    /etc/postfix/mynetworks
+    /etc/postfix/mynetworks.cidr
 );
 
 #
@@ -102,9 +102,6 @@ event_actions('migration-import', qw(
 #
 foreach (qw(network-create network-delete)) {
     event_templates($_, qw(
-        /etc/postfix/mynetworks
-    ));
-    event_actions($_, qw(
-        nethserver-mail-postmap-update 30
+        /etc/postfix/mynetworks.cidr
     ));
 }

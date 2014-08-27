@@ -9,7 +9,6 @@
 	transport
 	vmailbox
 	access
-	mynetworks
     );
 
     '';
