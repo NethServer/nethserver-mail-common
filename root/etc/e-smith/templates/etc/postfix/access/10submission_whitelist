@@ -1,0 +1,16 @@
+
+#
+# 10submission_whitelist -- expand old template for backward compatibility
+#                           Refs #2814
+# 
+{    
+    use esmith::templates;
+
+    my $templateOutput = esmith::templates::processTemplate({
+        TEMPLATE_PATH => 'etc/postfix/submission_whitelist',
+        OUTPUT_TYPE => 'string'}) || '';
+
+    return $templateOutput || '# no custom template defined';
+}
+
+

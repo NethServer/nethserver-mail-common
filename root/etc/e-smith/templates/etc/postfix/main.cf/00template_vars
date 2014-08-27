@@ -11,18 +11,18 @@
     # 60smtpd_restrictions fragment
     #
     @smtpd_client_restrictions = (
-        'check_client_access hash:/etc/postfix/submission_whitelist',
+        'check_client_access hash:/etc/postfix/access',
         'reject_unauth_pipelining'
     );
 
     @smtpd_helo_restrictions = (
-	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'check_client_access hash:/etc/postfix/access',
 	'reject_invalid_helo_hostname',
 	'reject_non_fqdn_helo_hostname'
     );
 
     @smtpd_sender_restrictions = (
-	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'check_client_access hash:/etc/postfix/access',
 	'reject_non_fqdn_sender',
 	'reject_unknown_sender_domain'
     );     
@@ -30,7 +30,7 @@
     @smtpd_relay_restrictions = ();
 
     @smtpd_recipient_restrictions = (
-        'check_client_access hash:/etc/postfix/submission_whitelist',
+        'check_client_access hash:/etc/postfix/access',
         'reject_non_fqdn_recipient',
         'permit_mynetworks',
         'reject_unauth_destination',
@@ -41,14 +41,14 @@
     # Default restrictions on submission ports 587 and 465
     #
     @submission_client_restrictions = (
-	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'check_client_access hash:/etc/postfix/access',
 	'permit_sasl_authenticated',
 	'permit_mynetworks',
 	'reject'				       
     );
 
     @submission_recipient_restrictions = (
-	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'check_client_access hash:/etc/postfix/access',
 	'permit_sasl_authenticated',
 	'permit_mynetworks',
 	'reject_unauth_destination'
