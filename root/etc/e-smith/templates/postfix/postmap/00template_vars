@@ -9,6 +9,7 @@
 	transport
 	vmailbox
 	submission_whitelist
+	mynetworks
     );
 
     '';
