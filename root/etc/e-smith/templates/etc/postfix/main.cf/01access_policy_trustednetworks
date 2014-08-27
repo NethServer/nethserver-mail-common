@@ -1,0 +1,24 @@
+{
+    #
+    # 01access_policy_trustednetworks -- Permit relay from any trusted network
+    #                                   
+    #   
+    $access_policies{'trustednetworks'} = sub {
+	@submission_client_restrictions = map { 
+	    $_ eq 'reject' ? ('permit_mynetworks',  $_) : $_ 
+	} @submission_client_restrictions;
+
+	@submission_recipient_restrictions = map {
+	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
+	} @submission_recipient_restrictions;	    
+
+	@smtpd_recipient_restrictions = map {
+	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
+	} @smtpd_recipient_restrictions;
+
+	$mynetworks = 'hash:/etc/postfix/mynetworks'
+	$mynetworks_style = 'subnet';
+    };    
+
+    '';
+}

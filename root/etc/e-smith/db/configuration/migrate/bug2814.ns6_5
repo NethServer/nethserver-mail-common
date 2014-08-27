@@ -1,0 +1,26 @@
+{
+    #
+    # Bug #2814: Migrate postfix/SubmissionPolicyType to 
+    #            postfix/AccessPolicies
+    #
+    # Remove on 6.6 Final release
+    #
+
+    if( ! exists $postfix{SubmissionPolicyType}) {
+	# prop was migrated, nothing to do;
+	return '';
+    }
+
+    my $propval = $DB->get_prop_and_delete('postfix', 'SubmissionPolicyType') || 'default';
+
+    my %new_values = (
+	'legacy' => 'smtpauth',
+	'localnetworks' => 'trustednetworks'
+	);
+
+    if($propval ne 'default') {
+	$DB->set_prop('postfix', 'AccessPolicies', exists $new_values{$propval} ? $new_values{$propval} : $propval);
+    }
+
+    '';
+}

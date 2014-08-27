@@ -92,4 +92,5 @@ foreach (qw(create modify delete)) {
 #
 event_actions('migration-import', qw(
     nethserver-mail-migrate-smarthost      30
+    nethserver-mail-migrate-accesspolicy      30
 ));
