@@ -1,7 +1,9 @@
 <?php 
 
 $L['${0} day'] = '${0} day'; 
-$L['${0} days'] = '${0} days'; 
+$L['${0} days'] = '${0} days';
+$L['AlwaysBccStatus_label'] = 'Always send a copy (Bcc)';
+$L['AlwaysBccAddress_label'] = 'Always send a copy (Bcc)';
 $L['Create a new domain'] = 'Create a new domain';
 $L['Delete_label'] = 'Delete';
 $L['Delete_Header'] = 'Delete message ${0}';

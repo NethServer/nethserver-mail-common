@@ -50,6 +50,8 @@ class Message extends \Nethgui\Controller\AbstractController
         $this->declareParameter('SmartHostUsername', Validate::ANYTHING, array('configuration', 'postfix', 'SmartHostUsername'));
         $this->declareParameter('SmartHostPassword', Validate::ANYTHING, array('configuration', 'postfix', 'SmartHostPassword'));
         $this->declareParameter('SmartHostTlsStatus', Validate::SERVICESTATUS, array('configuration', 'postfix', 'SmartHostTlsStatus'));
+        $this->declareParameter('AlwaysBccStatus', Validate::SERVICESTATUS, array('configuration', 'postfix', 'AlwaysBccStatus'));
+        $this->declareParameter('AlwaysBccAddress', Validate::EMAIL, array('configuration', 'postfix', 'AlwaysBccAddress'));
         parent::initialize();
     }
 
