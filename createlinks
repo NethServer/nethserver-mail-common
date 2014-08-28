@@ -85,7 +85,7 @@ my @domainTemplates = qw(
 foreach (qw(create modify delete)) {
     event_templates('domain-' . $_, @domainTemplates);
     event_actions('domain-'   . $_, 'nethserver-mail-postmap-update' => '30');
-    event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'restart');
+    event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'reload');
 }
 
 #
@@ -106,5 +106,6 @@ foreach (qw(network-create network-delete)) {
     ));
     event_services($_, qw(
         postfix reload
+        amavisd reload
     ));
 }
