@@ -6,68 +6,65 @@
     use esmith::DomainsDB;
     $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
 
-    # Restrictions default values. Parameter are expanded in
-    # 40smtpd_restrictions fragment
-
+    #
+    # Default smtpd restrictions (port 25). Parameters are expanded in
+    # 60smtpd_restrictions fragment
+    #
     @smtpd_client_restrictions = (
+        'check_client_access hash:/etc/postfix/access',
         'reject_unauth_pipelining'
     );
 
     @smtpd_helo_restrictions = (
-	'reject_invalid_helo_hostname',
-	'reject_non_fqdn_helo_hostname'
+	'check_client_access hash:/etc/postfix/access',
     );
 
     @smtpd_sender_restrictions = (
-	'reject_non_fqdn_sender',
-	'reject_unknown_sender_domain'
+	'check_client_access hash:/etc/postfix/access',
     );     
 
+    @smtpd_relay_restrictions = ();
+
     @smtpd_recipient_restrictions = (
-        'reject_non_fqdn_recipient',
+        'check_client_access hash:/etc/postfix/access',
+        'permit_mynetworks',
         'reject_unauth_destination',
         'reject_unverified_recipient'
     );
 
-    @virtual_mailbox_domains = ();
-
-
-    # Submission ports policy (empty).
-
+    #
+    # Default restrictions on submission ports 587 and 465
+    #
     @submission_client_restrictions = (
-	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'check_client_access hash:/etc/postfix/access',
+	'permit_sasl_authenticated',
+	'permit_mynetworks',
 	'reject'				       
     );
 
     @submission_recipient_restrictions = (
-	'check_client_access hash:/etc/postfix/submission_whitelist',
+	'check_client_access hash:/etc/postfix/access',
+	'permit_sasl_authenticated',
+	'permit_mynetworks',
 	'reject_unauth_destination'
     );
 
-    # Set the default submission policy
-    $submission_policy = 'localnetworks';
-
-    # Hash of subroutines that manipulate submission_*_restrictions
-    # lists:
-    %submission_policies = ();
-
     #
-    # Default submission ports restrictions: clients from mynetworks
-    # can submit messagges.
-    #   
-    $submission_policies{'localnetworks'} = sub {
-	@submission_client_restrictions = map { 
-	    $_ eq 'reject' ? ('permit_mynetworks',  $_) : $_ 
-	} @submission_client_restrictions;
-
-	@submission_recipient_restrictions = map {
-	    $_ eq 'reject_unauth_destination' ? ('permit_mynetworks',  $_) : $_ 
-	} @submission_recipient_restrictions;	    
-    };    
+    # Hash of subroutines that manipulate {smtpd|submission}_*_restrictions
+    # lists:
+    #
+    %access_policies = ();
     
+    #
     # Pluggable relay domain list (refs #1516) expanded in
     # 40relay_domains fragment:
+    #
     @relay_domains = ();
+
+    @virtual_mailbox_domains = ();
+
+    $mynetworks = '';
+    $mynetworks_style = '';
 
     '';
 }

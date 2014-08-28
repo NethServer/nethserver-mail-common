@@ -31,7 +31,8 @@ my @templates = qw(
     /etc/postfix/sasl_passwd
     /etc/postfix/tls_policy
     /etc/postfix/vmailbox
-    /etc/postfix/submission_whitelist
+    /etc/postfix/access
+    /etc/postfix/mynetworks.cidr
 );
 
 #
@@ -84,6 +85,27 @@ my @domainTemplates = qw(
 foreach (qw(create modify delete)) {
     event_templates('domain-' . $_, @domainTemplates);
     event_actions('domain-'   . $_, 'nethserver-mail-postmap-update' => '30');
-    event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'restart');
+    event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'reload');
 }
 
+#
+# migration
+#
+event_actions('migration-import', qw(
+    nethserver-mail-migrate-smarthost      30
+    nethserver-mail-migrate-accesspolicy      30
+));
+
+
+#
+# network create/delete events
+#
+foreach (qw(network-create network-delete)) {
+    event_templates($_, qw(
+        /etc/postfix/mynetworks.cidr
+    ));
+    event_services($_, qw(
+        postfix reload
+        amavisd reload
+    ));
+}
