@@ -104,4 +104,7 @@ foreach (qw(network-create network-delete)) {
     event_templates($_, qw(
         /etc/postfix/mynetworks.cidr
     ));
+    event_services($_, qw(
+        postfix reload
+    ));
 }
