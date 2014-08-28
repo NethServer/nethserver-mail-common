@@ -25,6 +25,7 @@ Common configuration for mail packages, based on Postfix.
 %setup
 
 %build
+%{makedocs}
 perl createlinks
 
 %install

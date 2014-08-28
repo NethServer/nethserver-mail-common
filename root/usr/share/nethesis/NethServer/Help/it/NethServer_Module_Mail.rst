@@ -99,27 +99,38 @@ Accetta messaggi fino a
     Utilizzare il cursore per selezionare la dimensione massima di un
     singolo messaggio email. Il server rifiuterà email più grandi del valore
     impostato, ritornando un errore esplicativo.
+
 Tenta l'invio per
     Utilizzare il cursore per selezionare il tempo massimo per cui il server
     tenterà di inviare un messaggio. Quando verrà raggiunto il tempo massimo
     e l'email non sarà ancora stata consegnata, il mittente riceverà un
     errore e il messaggio verrà eliminato dalla coda di invio, il server non
     tenterà più di consegnarlo.
+
+Spedisci sempre una copia (Bcc)
+    Spedisci una copia nascosta (Blind carbon copy - Bcc) all'indirizzo email
+    specificato per ogni messaggio che entra nel sistema di posta.
+
 Invia tramite smarthost
     Il server tenterà di inviare le mail direttamente a
     destinazione (raccomandato nella maggior parte dei casi). Selezionando
     invece l'invio tramite smarthost, tenterà di consegnarli attraverso il server
     SMTP del provider (raccomandato in caso di connessione inaffidabile o
     ADSL di tipo residenziale, IP dinamico, etc).
+
 Nome host
     Il nome del server mail del provider.
+
 Porta
     La porta del mail server del provider.
+
 Nome utente
     Se il server del provider richiede autenticazione, specificare il nome
     utente.
+
 Password
     La password richiesta dal provider.
+
 Consenti connessione non cifrata
     Normalmente, in caso di connessione autenticata (con utente e password),
     si utilizzerà una connessione cifrata. Selezionando questa opzione, sarà

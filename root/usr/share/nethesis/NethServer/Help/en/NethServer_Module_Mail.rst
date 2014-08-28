@@ -120,6 +120,10 @@ Retry sending for
     error and the message is removed from the send queue, the server will no
     longer attempting to deliver it.
 
+Always send a copy (Bcc)
+    Send a blind carbon copy (Bcc) to the given email address for any message
+    entering the mail system.
+
 Send using a smarthost
     The server will attempt to send emails directly to
     destination (recommended in most cases). Selecting

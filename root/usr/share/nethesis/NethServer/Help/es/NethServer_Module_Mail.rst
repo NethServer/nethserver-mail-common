@@ -99,6 +99,10 @@ Acepte el tamaño del mensaje a
 Vuelva a intentar el envío de
     Utilice el cursor para seleccionar el tiempo máximo durante el cual el servidor tratará de enviar un mensaje. Cuando llega el tiempo máximo y el correo electrónico no ha sido entregado, el remitente recibirá un error y el mensaje se elimina de la cola de envío, el servidor no intentará entregarlo.
 
+Always send a copy (Bcc)
+    Send a blind carbon copy (Bcc) to the given email address for any message
+    entering the mail system.
+
 Enviar usando un host inteligente
     El servidor intentará enviar correos electrónicos directamente a sudestino (recomendado en la mayoría de los casos). Selecciona en lugar de enviar a través de un host inteligente, se intentará entregar a través de la El servidor SMTP del ISP (se recomienda en caso de una conexión poco fiable o ADSL residencial, IP dinámica, etc.) 
 
