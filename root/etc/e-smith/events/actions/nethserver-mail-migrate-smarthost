@@ -45,7 +45,7 @@ $postfixRecord->merge_props(
     SmartHostName => $S{'SMTPSmartHost'}->{'type'},
     SmartHostPassword => $S{'smtp-auth-proxy'}->{'Passwd'},
     SmartHostUsername => $S{'smtp-auth-proxy'}->{'Userid'},
-    SmartHostPort => ($S{'smtp-auth-proxy'}->{'PeerPort'} || '') eq '465' ? '25' : $S{'smtp-auth-proxy'}->{'PeerPort'},
+    SmartHostPort => ($S{'smtp-auth-proxy'}->{'PeerPort'} || '25') eq '465' ? '25' : ($S{'smtp-auth-proxy'}->{'PeerPort'} || '25'),
     SmartHostTlsStatus => ($S{'smtp-auth-proxy'}->{'PeerPort'} || '') eq '465' ? 'enabled' : 'disabled'
     );
 
