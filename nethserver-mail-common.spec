@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.3.3
+Version: 1.4.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -47,6 +47,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Tue Oct 07 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.0-1.ns6
+- Silence postfix resource problems notifications - Enhancement #2824
+- Relay denied to SMTP clients both in local networks and submission_whitelist - Bug #2814
+- Smarthost configuration ignored during migration - Bug #2804
+- Edit workgroup name when role is Workstation - Enhancement #2803
+- Differentiate Postfix syslog_name parameters - Enhancement #2784
+- Relax Postix restrictions for whitelisted senders - Enhancement #2768
+- Customizable SMTP HELO value - Enhancement #2767
+- Mail spying / always Bcc - Feature #2750
+
 * Fri Jun 06 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.3.3-1.ns6
 - Disclaimer creation fails - Bug #2724
 - Mail: Incorrect value RelayPort_label - Bug #2713
