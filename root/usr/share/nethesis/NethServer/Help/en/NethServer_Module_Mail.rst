@@ -2,7 +2,7 @@
 Email
 =====
 
-Configure the e-mail services
+Configure the email services.
 
 Domains
 =======
@@ -80,7 +80,7 @@ Mailboxes
 ================
 
 In this tab, you can configure some parameters related to the
-local mail folders.
+local email folders.
 
 IMAP
     Enable folder access through the IMAP protocol (recommended).
@@ -95,7 +95,7 @@ Disk space
     Allows you to limit disk usage by email.
     
     * Unlimited: select not to impose limits
-    * Apply quota: limit maximum space of mail for each user to the value
+    * Apply quota: limit maximum space of email for each user to the value
       indicated (email quota).
 
 Move to Folder * junkmail *
@@ -110,7 +110,7 @@ Configure the management of email messages.
 
 Accept message size to
     Use the cursor to select the maximum size of a
-    single email message. The server will reject mail larger than the value
+    single email message. The server will reject email larger than the value
     set, returning an explanatory error.
 
 Retry sending for
@@ -122,7 +122,7 @@ Retry sending for
 
 Always send a copy (Bcc)
     Send a blind carbon copy (Bcc) to the given email address for any message
-    entering the mail system.
+    entering the email system.
 
 Send using a smarthost
     The server will attempt to send emails directly to
@@ -167,7 +167,7 @@ and is normally empty. The following fields will be shown:
 Delete
 -------
 
-It's possible to delete an e-mail in the queue, for example, an email sent
+It is possible to delete an email in the queue, for example, an email sent
 by mistake or too large.
 
 Remove all
