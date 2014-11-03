@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.4.0
+Version: 1.4.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Mon Nov 03 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.1-1.ns6
+- Access policy smtpauth still too restrictive - Bug #2917 [NethServer]
+
 * Tue Oct 07 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.0-1.ns6
 - Silence postfix resource problems notifications - Enhancement #2824
 - Relay denied to SMTP clients both in local networks and submission_whitelist - Bug #2814
