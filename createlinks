@@ -43,6 +43,7 @@ event_templates('nethserver-mail-common-update',
 		@templates, qw(
 		/etc/sudoers
 		/etc/amavisd.conf
+		/etc/sysconfig/amavisd
                 /etc/hosts
                 /etc/dnsmasq.conf
 ));
