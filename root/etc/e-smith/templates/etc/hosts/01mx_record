@@ -4,7 +4,8 @@
     #
 
     # Add DNS aliases only if acting as resolver:
-    if($dns{role} eq 'resolver' && $postfix{MxRecordStatus} eq 'enabled') {
+    use NethServer::Service;
+    if( NethServer::Service::is_enabled('dnsmasq') && $postfix{MxRecordStatus} eq 'enabled')  {
         push @hostnames, map { join('.', $_, $DomainName) } qw(smtp imap pop pop3);
     }
     '';
