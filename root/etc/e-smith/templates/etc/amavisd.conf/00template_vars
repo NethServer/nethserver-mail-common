@@ -17,6 +17,8 @@
     } else {
 	$content_inspection_type = $postfix{ContentInspectionType};
     }
+
+    @domainList = ( join('.', $SystemName, $DomainName),  $SystemName . '.localdomain',  'localhost');
     
     '';
 }
