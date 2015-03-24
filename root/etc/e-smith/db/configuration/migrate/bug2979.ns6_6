@@ -1,0 +1,11 @@
+{
+    #
+    # bug2979.ns6_6 -- remove unused prop SmartHostAuthStatus
+    #
+    my $status = $DB->get_prop_and_delete('postfix', 'SmartHostAuthStatus');
+    if(($status || '') eq 'disabled') {
+        $DB->set_prop('postfix', 'SmartHostUsername', '');
+        $DB->set_prop('postfix', 'SmartHostPassword', '');
+    }
+    '';
+}

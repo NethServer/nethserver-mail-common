@@ -41,7 +41,6 @@ if( ! $postfixRecord) {
 
 $postfixRecord->merge_props(
     SmartHostStatus => ($S{'SMTPSmartHost'}->{'type'} || '') ? 'enabled' : 'disabled',
-    SmartHostAuthStatus => ($S{'smtp-auth-proxy'}->{'status'} || '') eq 'enabled' ? 'enabled' : 'disabled',
     SmartHostName => $S{'SMTPSmartHost'}->{'type'},
     SmartHostPassword => $S{'smtp-auth-proxy'}->{'Passwd'},
     SmartHostUsername => $S{'smtp-auth-proxy'}->{'Userid'},
