@@ -39,11 +39,13 @@ if( ! $postfixRecord) {
     die("Could not find postfix record in ConfigDB!");
 }
 
+my $with_smtp_auth = ($S{'smtp-auth-proxy'}->{'status'} || '') eq 'enabled';
+
 $postfixRecord->merge_props(
     SmartHostStatus => ($S{'SMTPSmartHost'}->{'type'} || '') ? 'enabled' : 'disabled',
     SmartHostName => $S{'SMTPSmartHost'}->{'type'},
-    SmartHostPassword => $S{'smtp-auth-proxy'}->{'Passwd'},
-    SmartHostUsername => $S{'smtp-auth-proxy'}->{'Userid'},
+    SmartHostPassword => $with_smtp_auth ? $S{'smtp-auth-proxy'}->{'Passwd'} : '',
+    SmartHostUsername => $with_smtp_auth ? $S{'smtp-auth-proxy'}->{'Userid'} : '',
     SmartHostPort => ($S{'smtp-auth-proxy'}->{'PeerPort'} || '25') eq '465' ? '25' : ($S{'smtp-auth-proxy'}->{'PeerPort'} || '25'),
     SmartHostTlsStatus => ($S{'smtp-auth-proxy'}->{'PeerPort'} || '') eq '465' ? 'enabled' : 'disabled'
     );
