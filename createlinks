@@ -79,7 +79,6 @@ my @domainTemplates = qw(
     /etc/postfix/main.cf
     /etc/postfix/transport
     /etc/postfix/vmailbox
-    /etc/postfix/virtual
     /etc/amavisd.conf
 );
 
