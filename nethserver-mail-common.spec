@@ -14,6 +14,7 @@ Requires: nethserver-base >= 1.1.0-2
 # - perl-Convert-BinHex, (issues  a startup warning)
 # - /usr/sbin/tmpwatch command
 Requires: amavisd-new >= 2.8.0-4, perl-Convert-BinHex, tmpwatch
+Requires: cyrus-sasl-plain
 
 BuildRequires: perl
 BuildRequires: nethserver-devtools >= 1.0.0
