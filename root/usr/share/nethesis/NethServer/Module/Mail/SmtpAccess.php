@@ -30,8 +30,14 @@ class SmtpAccess extends \Nethgui\Controller\AbstractController
     public function initialize()
     {
         parent::initialize();
+
+        $tnAdapter = $this->getPlatform()->getMapAdapter(array($this, 'xreadAccessPolicyTrustedNetworks'), array($this, 'xwriteAccessPolicyTrustedNetworks'), array());
+        $saAdapter = $this->getPlatform()->getMapAdapter(array($this, 'xreadAccessPolicySmtpAuth'), array($this, 'xwriteAccessPolicySmtpAuth'), array());
+
         $this->declareParameter('AccessBypassList', $this->createValidator(TRUE), array('configuration', 'postfix', 'AccessBypassList'));
-        $this->declareParameter('AccessPolicyTrustedNetworks', \Nethgui\System\PlatformInterface::YES_NO, array('configuration', 'postfix', 'AccessPolicies'));
+        $this->declareParameter('AccessPolicyTrustedNetworks', \Nethgui\System\PlatformInterface::YES_NO, $tnAdapter);
+        $this->declareParameter('AccessPolicySmtpAuth', \Nethgui\System\PlatformInterface::YES_NO, $saAdapter);
+        $this->declareParameter('AccessPolicies', FALSE, array('configuration', 'postfix', 'AccessPolicies', ','));
     }
 
     public static function splitLines($text)
@@ -49,20 +55,36 @@ class SmtpAccess extends \Nethgui\Controller\AbstractController
         return array(implode(',', self::splitLines($viewText)));
     }
 
-    public function readAccessPolicyTrustedNetworks($dbList)
+    public function xreadAccessPolicyTrustedNetworks()
     {
-        return in_array('trustednetworks', explode(',', $dbList)) ? 'yes' : 'no';
+        return in_array('trustednetworks', (array) $this->parameters['AccessPolicies']) ? 'yes' : 'no';
     }
 
-    public function writeAccessPolicyTrustedNetworks($viewText)
+    public function xwriteAccessPolicyTrustedNetworks($viewText)
+    {
+        return $this->writeInListCond($viewText, 'trustednetworks');
+    }
+
+    public function xreadAccessPolicySmtpAuth()
+    {
+        return in_array('smtpauth', (array) $this->parameters['AccessPolicies']) ? 'yes' : 'no';
+    }
+
+    public function xwriteAccessPolicySmtpAuth($viewText)
+    {
+        return $this->writeInListCond($viewText, 'smtpauth');
+    }
+
+    private function writeInListCond($viewText, $optionName)
     {
         $condition = $viewText === 'yes';
-        $values = explode(',', $this->getPlatform()->getDatabase('configuration')->getProp('postfix', 'AccessPolicies'));
-        $status = in_array('trustednetworks', $values);
+        $values = (array) $this->parameters['AccessPolicies'];
+        $status = in_array($optionName, $values);
         if ($condition != $status) {
-            $values = $status ? array_diff($values, array('trustednetworks')) : array_merge($values, array('trustednetworks'));
+            $values = $status ? array_diff($values, array($optionName)) : array_merge($values, array($optionName));
         }
-        return array(implode(',', array_filter($values)));
+        $this->parameters['AccessPolicies'] = array_filter($values);
+        return array();
     }
 
     public function validate(\Nethgui\Controller\ValidationReportInterface $report)
