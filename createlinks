@@ -32,6 +32,7 @@ my @templates = qw(
     /etc/postfix/tls_policy
     /etc/postfix/vmailbox
     /etc/postfix/access
+    /etc/postfix/access.cidr
     /etc/postfix/mynetworks.cidr
 );
 
