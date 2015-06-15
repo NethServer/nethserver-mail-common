@@ -192,18 +192,15 @@ SMTP access
 ===========
 
 Allow relay from IP addresses
-
     Allow sending mail messages from the specified IP address, without
     SMTP authentication and other security policy restrictions.  This option
     is good for legacy network devices that do not support SMTP/AUTH protocol.
 
 Allow relay from trusted networks
-
     Allow sending mail messages from any host in the trusted networks, without
     SMTP authentication and other security policy restrictions.
 
 Enable authentication on port 25
-
     Email clients should send messages only using the standard submission port
     587.  For legacy environments, this option enables client authentication and
     message relaying also on port 25.
