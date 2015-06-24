@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.4.5
+Version: 1.5.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Wed Jun 24 2015 Davide Principi <davide.principi@nethesis.it> - 1.5.0-1
+- Postfix: in-memory address verification database - Enhancement #3135 [NethServer]
+- Dovecot admin master user - Feature #2990 [NethServer]
+- "Queue message max size" custom value - Enhancement #2940 [NethServer]
+- mail-server: configure IP-based access policy from UI - Feature #2919 [NethServer]
+
 * Tue May 19 2015 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.5-1
 - mail-common/smarthost: SASL authentication failure - Bug #3143 [NethServer]
 
