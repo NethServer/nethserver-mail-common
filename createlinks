@@ -99,14 +99,12 @@ event_actions('migration-import', qw(
 
 
 #
-# network create/delete events
+# trusted-networks-modify event
 #
-foreach (qw(network-create network-delete)) {
-    event_templates($_, qw(
-        /etc/postfix/mynetworks.cidr
-    ));
-    event_services($_, qw(
-        postfix reload
-        amavisd reload
-    ));
-}
+event_templates('trusted-networks-modify', qw(
+    /etc/postfix/mynetworks.cidr
+));
+event_services('trusted-networks-modify', qw(
+    postfix reload
+    amavisd reload
+));
