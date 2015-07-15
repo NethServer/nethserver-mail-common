@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.5.0
+Version: 1.5.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Wed Jul 15 2015 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.1-1
+- Event trusted-networks-modify - Enhancement #3195 [NethServer]
+
 * Wed Jun 24 2015 Davide Principi <davide.principi@nethesis.it> - 1.5.0-1
 - Postfix: in-memory address verification database - Enhancement #3135 [NethServer]
 - Dovecot admin master user - Feature #2990 [NethServer]
