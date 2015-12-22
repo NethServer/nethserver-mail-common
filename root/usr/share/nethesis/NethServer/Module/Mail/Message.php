@@ -36,7 +36,7 @@ class Message extends \Nethgui\Controller\AbstractController
     {
         $messageSizeMaxAdapter = $this->getPlatform()->getMapAdapter(
             function($s) {
-                return $s / 1000000;
+                return intval($s / 1000000);
             }, function($v) {
                 return array($v * 1000000);
             }, array(array('configuration', 'postfix', 'MessageSizeMax'))
@@ -57,31 +57,39 @@ class Message extends \Nethgui\Controller\AbstractController
 
     public function prepareView(\Nethgui\View\ViewInterface $view)
     {
-        $view['MessageSizeMaxDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
-                '10' => '10 MB',
-                '20' => '20 MB',
-                '50' => '50 MB',
-                '100' => '100 MB',
-                '200' => '200 MB',
-                '500' => '500 MB',
-                '1000' => '1 GB',
-            ));
+        $sz = array(
+            '10' => '10 MB',
+            '20' => '20 MB',
+            '50' => '50 MB',
+            '100' => '100 MB',
+            '200' => '200 MB',
+            '500' => '500 MB',
+            '1000' => '1 GB',
+            $this->parameters['MessageSizeMax'] => sprintf('%s MB', $this->parameters['MessageSizeMax'])
+        );
+        ksort($sz, SORT_NUMERIC);
 
-        $view['MessageQueueLifetimeDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource(array(
-                '1' => $view->translate('${0} day', array(1)),
-                '2' => $view->translate('${0} days', array(2)),
-                '4' => $view->translate('${0} days', array(4)),
-                '7' => $view->translate('${0} days', array(7)),
-                '15' => $view->translate('${0} days', array(15)),
-                '30' => $view->translate('${0} days', array(30)),
-            ));
+        $view['MessageSizeMaxDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource($sz);
+
+        $lt = array(
+            '1' => $view->translate('${0} day', array(1)),
+            '2' => $view->translate('${0} days', array(2)),
+            '4' => $view->translate('${0} days', array(4)),
+            '7' => $view->translate('${0} days', array(7)),
+            '15' => $view->translate('${0} days', array(15)),
+            '30' => $view->translate('${0} days', array(30)),
+            $this->parameters['MessageQueueLifetime'] => $view->translate('${0} days', array($this->parameters['MessageQueueLifetime']))
+        );
+        ksort($lt, SORT_NUMERIC);
+
+        $view['MessageQueueLifetimeDatasource'] = \Nethgui\Renderer\AbstractRenderer::hashToDatasource($lt);
 
         parent::prepareView($view);
     }
 
     protected function onParametersSaved($changedParameters)
     {
-        $this->getPlatform()->signalEvent('nethserver-mail-common-save@post-process');
+        $this->getPlatform()->signalEvent('nethserver-mail-common-save &');
     }
 
 }

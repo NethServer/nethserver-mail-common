@@ -75,33 +75,9 @@ Custom List
     Define a list of extensions that will be blocked,
     such as doc, pdf, etc. (without starting dot, ie doc and not .doc).
 
+.. raw:: html
 
-Mailboxes
-================
-
-In this tab, you can configure some parameters related to the
-local email folders.
-
-IMAP
-    Enable folder access through the IMAP protocol (recommended).
-
-POP3
-    Enable folder access through the POP3 protocol (not recommended).
-
-Allow unencrypted connections
-    Allows you to enable access to the folders using unencrypted protocols (not recommended).
-
-Disk space
-    Allows you to limit disk usage by email.
-    
-    * Unlimited: select not to impose limits
-    * Apply quota: limit maximum space of email for each user to the value
-      indicated (email quota).
-
-Move to Folder * junkmail *
-    Email messages identified as spam are moved to each user folder
-    * Junkmail * instead of being delivered to the Inbox.
-
+   {{{INCLUDE NethServer_Module_Mail_*.html}}}
 
 Messages
 ========
@@ -186,3 +162,21 @@ Update
 --------
 
 Reload the list of emails in the queue.
+
+
+SMTP access
+===========
+
+Allow relay from IP addresses
+    Allow sending mail messages from the specified IP address, without
+    SMTP authentication and other security policy restrictions.  This option
+    is good for legacy network devices that do not support SMTP/AUTH protocol.
+
+Allow relay from trusted networks
+    Allow sending mail messages from any host in the trusted networks, without
+    SMTP authentication and other security policy restrictions.
+
+Enable authentication on port 25
+    Email clients should send messages only using the standard submission port
+    587.  For legacy environments, this option enables client authentication and
+    message relaying also on port 25.

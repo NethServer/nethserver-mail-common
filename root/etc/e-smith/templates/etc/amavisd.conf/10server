@@ -13,7 +13,7 @@ $ENV\{TMPDIR\} = $TEMPBASE;    # environment variable TMPDIR, used by SA, etc.
 
 $db_home   = "$MYHOME/db";      # dir for bdb nanny/cache/snmp databases, -D
 
-$log_level = 0;              # verbosity 0..5, -d
+$log_level = 2;              # verbosity 0..5, -d
 $log_recip_templ = undef;    # disable by-recipient level-0 log entries
 $do_syslog = 1;              # log via syslogd (preferred)
 
