@@ -43,8 +43,7 @@ my @templates = qw(
 event_templates('nethserver-mail-common-update', 
 		@templates, qw(
 		/etc/sudoers
-		/etc/amavisd.conf
-		/etc/sysconfig/amavisd
+		/etc/amavisd/amavisd.conf
                 /etc/hosts
                 /etc/dnsmasq.conf
 ));
@@ -80,7 +79,7 @@ my @domainTemplates = qw(
     /etc/postfix/main.cf
     /etc/postfix/transport
     /etc/postfix/vmailbox
-    /etc/amavisd.conf
+    /etc/amavisd/amavisd.conf
 );
 
 foreach (qw(create modify delete)) {
