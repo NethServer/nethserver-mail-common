@@ -5,3 +5,5 @@
 # use pre-2.7 default: in-memory DB
 address_verify_map =
 
+# don't cache negative responses #3347
+address_verify_negative_cache = no
