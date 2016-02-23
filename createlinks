@@ -30,7 +30,6 @@ my @templates = qw(
     /etc/postfix/transport
     /etc/postfix/sasl_passwd
     /etc/postfix/tls_policy
-    /etc/postfix/vmailbox
     /etc/postfix/access
     /etc/postfix/access.cidr
     /etc/postfix/mynetworks.cidr
@@ -78,7 +77,6 @@ event_services('nethserver-mail-common-save',
 my @domainTemplates = qw(
     /etc/postfix/main.cf
     /etc/postfix/transport
-    /etc/postfix/vmailbox
     /etc/amavisd/amavisd.conf
 );
 

@@ -6,20 +6,13 @@
     use esmith::util;
     $Data::Dumper::Terse = 1;
     $Data::Dumper::Indent = 0;
-    
+
     # Control anti-virus and anti-spam checks:
     $virus_check_status = 0;
     $spam_check_status = 0;
-    
-    # The default content inspection type:
-    if( ! $postfix{ContentInspectionType} || $postfix{ContentInspectionType} eq 'default') {
-	$content_inspection_type = 'after-queue';
-    } else {
-	$content_inspection_type = $postfix{ContentInspectionType};
-    }
 
     @domainList = ( join('.', $SystemName, $DomainName),  $SystemName . '.localdomain',  'localhost');
-    
+
     '';
 }
 
