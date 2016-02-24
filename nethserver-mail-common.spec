@@ -26,7 +26,9 @@ perl createlinks
 %install
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
-%{genfilelist} %{buildroot} > %{name}-%{version}-filelist
+%{genfilelist} %{buildroot} | sed '
+\|^%{_sysconfdir}/sudoers.d/20_nethserver_mail_common$| d
+' > %{name}-%{version}-filelist
 
 mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 
@@ -35,6 +37,7 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
 %dir %attr(2775,root,adm) %{_nsstatedir}/mail-disclaimers
+%config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
 
 %changelog
 * Thu Feb 18 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.3-1
