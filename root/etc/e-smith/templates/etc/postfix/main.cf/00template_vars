@@ -2,8 +2,11 @@
     #
     # 00template_vars
     #
-
     use esmith::DomainsDB;
+    use Sys::Hostname;
+
+    $fqdn = hostname();
+    $domainName = (split(/\./, $fqdn, 2))[-1];
     $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
 
     #
