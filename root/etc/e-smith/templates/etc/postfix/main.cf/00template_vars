@@ -64,8 +64,6 @@
     #
     @relay_domains = ();
 
-    @virtual_mailbox_domains = ();
-
     $mynetworks = '';
     $mynetworks_style = '';
 
