@@ -1,8 +1,14 @@
 #
 # 10server -- prefork, daemon, paths configuration
-# 
+#
+# F = { $forksize = $amavisd{'MaxProcesses'} > 2 ? $amavisd{'MaxProcesses'} : 2; }
+#
 
-$max_servers = { $amavisd{MaxProcesses} > 2 ? $amavisd{MaxProcesses} : 2 };            # num of pre-forked children (2..30 is common), -m
+$min_servers = 2;
+$min_spare_servers = 1;
+$max_spare_servers = { $forksize };
+$max_servers = { 20 + ($forksize * 4) };
+$max_requests = 40;
 $daemon_user  = "amavis";     # (no default;  customary: vscan or amavis), -u
 $daemon_group = "amavis";     # (no default;  customary: vscan or amavis), -g
 $pid_file = "/var/run/amavisd/amavisd.pid";
@@ -41,5 +47,8 @@ $policy_bank\{'SUBMISSION'\} = \{
 # (see #1968):
 $smtp_connection_cache_on_demand = 0;
 $smtp_connection_cache_enable = 0;
+
+# Optimize timeout for pre-queue setup
+$child_timeout = 45;
 
 
