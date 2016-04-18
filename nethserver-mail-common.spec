@@ -3,7 +3,7 @@ Name: nethserver-mail-common
 Version: 1.5.3
 Release: 1%{?dist}
 License: GPL
-URL: %{url_prefix}/%{name} 
+URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
@@ -26,14 +26,18 @@ perl createlinks
 %install
 rm -rf %{buildroot}
 (cd root; find . -depth -print | cpio -dump %{buildroot})
-%{genfilelist} %{buildroot} \
-   --dir /var/lib/nethserver/mail-disclaimers 'attr(2775,root,adm)' \
-   > %{name}-%{version}-filelist
+%{genfilelist} %{buildroot} | sed '
+\|^%{_sysconfdir}/sudoers.d/20_nethserver_mail_common$| d
+' > %{name}-%{version}-filelist
+
+mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
+%dir %attr(2775,root,adm) %{_nsstatedir}/mail-disclaimers
+%config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
 
 %changelog
 * Thu Feb 18 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.3-1

@@ -2,8 +2,11 @@
     #
     # 00template_vars
     #
-
     use esmith::DomainsDB;
+    use Sys::Hostname;
+
+    $fqdn = hostname();
+    $domainName = (split(/\./, $fqdn, 2))[-1];
     $domainsDb = esmith::DomainsDB->open_ro() || die('Could not open DomainsDB');
 
     #
@@ -12,25 +15,21 @@
     #
     @smtpd_client_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
-        'check_client_access hash:/etc/postfix/access',
         'reject_unauth_pipelining'
     );
 
     @smtpd_helo_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
-	'check_client_access hash:/etc/postfix/access',
     );
 
     @smtpd_sender_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
-	'check_client_access hash:/etc/postfix/access',
-    );     
+    );
 
     @smtpd_relay_restrictions = ();
 
     @smtpd_recipient_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
-        'check_client_access hash:/etc/postfix/access',
         'permit_mynetworks',
         'reject_unauth_destination',
         'reject_unverified_recipient'
@@ -41,7 +40,6 @@
     #
     @submission_client_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
-	'check_client_access hash:/etc/postfix/access',
 	'permit_sasl_authenticated',
 	'permit_mynetworks',
 	'reject'				       
@@ -49,7 +47,6 @@
 
     @submission_recipient_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
-	'check_client_access hash:/etc/postfix/access',
 	'permit_sasl_authenticated',
 	'permit_mynetworks',
 	'reject_unauth_destination'
@@ -66,8 +63,6 @@
     # 40relay_domains fragment:
     #
     @relay_domains = ();
-
-    @virtual_mailbox_domains = ();
 
     $mynetworks = '';
     $mynetworks_style = '';

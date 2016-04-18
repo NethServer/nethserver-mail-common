@@ -7,8 +7,6 @@
 	sasl_passwd
 	tls_policy
 	transport
-	vmailbox
-	access
     );
 
     '';

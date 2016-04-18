@@ -1,5 +1,5 @@
 {
-    # 
+    #
     # 00template_vars
     #
 
@@ -19,13 +19,6 @@
       strict_rfc821_envelopes=no
       syslog_name=submission
     );
-
-    # The default content inspection type:
-    if( ! $postfix{ContentInspectionType} || $postfix{ContentInspectionType} eq 'default') {
-	$content_inspection_type = 'amavisd-after-queue';
-    } else {
-	$content_inspection_type = $postfix{ContentInspectionType};
-    }
 
     # The maximum number of smtpd processes spawned:
     $connections_limit = 0;
