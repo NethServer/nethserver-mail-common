@@ -1,5 +1,5 @@
 <?php
-namespace NethServer\Module\Mail;
+namespace NethServer\Module;
 
 /*
  * Copyright (C) 2012 Nethesis S.r.l.
@@ -28,8 +28,16 @@ use Nethgui\System\PlatformInterface as Validate;
  * @author Davide Principi <davide.principi@nethesis.it>
  * @since 1.0
  */
-class Queue extends \Nethgui\Controller\TableController
+class MailQueue extends \Nethgui\Controller\TableController
 {
+
+    protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $attributes)
+    {
+        return new \NethServer\Tool\CustomModuleAttributesProvider($attributes, array(
+            'languageCatalog' => array('NethServer_Module_Mail'),
+            'category' => 'Status')
+        );
+    }
 
     public function initialize()
     {
@@ -45,10 +53,10 @@ class Queue extends \Nethgui\Controller\TableController
         $this
             ->setTableAdapter(new \Nethgui\Adapter\LazyLoaderAdapter(array($this, 'readMailQueue')))
             ->setColumns($columns)
-            ->addTableAction(new Queue\Refresh())
-            ->addTableAction(new Queue\Flush())
-            ->addTableAction(new Queue\DeleteAll())
-            ->addRowAction(new Queue\Delete())
+            ->addTableAction(new MailQueue\Refresh())
+            ->addTableAction(new MailQueue\Flush())
+            ->addTableAction(new MailQueue\DeleteAll())
+            ->addRowAction(new MailQueue\Delete())
         ;
 
         parent::initialize();

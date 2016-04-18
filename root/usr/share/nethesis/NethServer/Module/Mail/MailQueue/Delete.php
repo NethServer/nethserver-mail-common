@@ -1,5 +1,5 @@
 <?php
-namespace NethServer\Module\Mail\Queue;
+namespace NethServer\Module\MailQueue;
 
 /*
  * Copyright (C) 2013 Nethesis S.r.l.
@@ -72,14 +72,6 @@ class Delete extends \Nethgui\Controller\Table\RowAbstractAction
         } else {
             parent::process();
         }
-    }
-
-    public function nextPath()
-    {
-        if($this->getRequest()->isMutation()) {
-            return '/Mail/Queue/read';
-        }
-        return parent::nextPath();
     }
 
 }

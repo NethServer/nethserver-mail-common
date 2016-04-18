@@ -1,5 +1,5 @@
 <?php
-namespace NethServer\Module\Mail\Queue;
+namespace NethServer\Module\MailQueue;
 
 /*
  * Copyright (C) 2012 Nethesis S.r.l.
@@ -56,14 +56,6 @@ class Flush extends \Nethgui\Controller\Table\AbstractAction
     {
         parent::prepareView($view);
         $view['messageCount'] = $this->messageCount;
-    }
-
-    public function nextPath()
-    {
-        if ($this->getRequest()->isMutation()) {
-            return '/Mail/Queue/read';
-        }
-        return parent::nextPath();
     }
 
 }
