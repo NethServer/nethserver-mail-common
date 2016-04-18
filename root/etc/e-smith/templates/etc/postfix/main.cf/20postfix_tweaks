@@ -11,6 +11,5 @@ unverified_recipient_reject_code = 550
 # Refs #2824 -- Silence postfix resource problems notifications
 #
 notify_classes = 
-smtpd_proxy_timeout = 240s
 
 
