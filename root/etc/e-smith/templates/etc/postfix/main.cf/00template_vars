@@ -26,13 +26,19 @@
         'check_client_access cidr:/etc/postfix/access.cidr',
     );
 
-    @smtpd_relay_restrictions = ();
+    @smtpd_relay_restrictions = (
+        'check_client_access cidr:/etc/postfix/access.cidr',
+        'permit_mynetworks',
+        'permit_sasl_authenticated',
+        'reject_unauth_destination',
+        'reject_unverified_recipient',
+    );
 
     @smtpd_recipient_restrictions = (
         'check_client_access cidr:/etc/postfix/access.cidr',
         'permit_mynetworks',
-        'reject_unauth_destination',
-        'reject_unverified_recipient'
+        'permit_sasl_authenticated',
+
     );
 
     #
