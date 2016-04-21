@@ -69,6 +69,7 @@ class Delete extends \Nethgui\Controller\Table\RowAbstractAction
             if ($process->getExitCode() != 0) {
                 $this->getLog()->error(sprintf("%s: postsuper -d %s command failed - %s", __CLASS__, $keyValue, $process->getOutput()));
             }
+            $this->getParent()->getAdapter()->flush();
         } else {
             parent::process();
         }

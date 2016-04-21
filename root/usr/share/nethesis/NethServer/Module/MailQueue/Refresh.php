@@ -1,4 +1,5 @@
 <?php
+
 namespace NethServer\Module\MailQueue;
 
 /*
@@ -35,8 +36,17 @@ class Refresh extends \Nethgui\Controller\Table\AbstractAction
         $this->setViewTemplate(FALSE);
     }
 
+    public function prepareView(\Nethgui\View\ViewInterface $view)
+    {
+        parent::prepareView($view);
+        if($this->getRequest()->isValidated()) {
+            $view->getCommandList()->sendQuery($view->getModuleUrl('/MailQueue/read'));
+        }
+    }
+
     public function nextPath()
     {
-        return '/MailQueue/read';
+        return FALSE;
     }
+
 }
