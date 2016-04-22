@@ -1,5 +1,6 @@
 <?php
-namespace NethServer\Module\Mail\Queue;
+
+namespace NethServer\Module\MailQueue;
 
 /*
  * Copyright (C) 2012 Nethesis S.r.l.
@@ -35,9 +36,17 @@ class Refresh extends \Nethgui\Controller\Table\AbstractAction
         $this->setViewTemplate(FALSE);
     }
 
+    public function prepareView(\Nethgui\View\ViewInterface $view)
+    {
+        parent::prepareView($view);
+        if($this->getRequest()->isValidated()) {
+            $view->getCommandList()->sendQuery($view->getModuleUrl('/MailQueue/read'));
+        }
+    }
+
     public function nextPath()
     {
-        return '/Mail/Queue/read';
+        return FALSE;
     }
 
 }
