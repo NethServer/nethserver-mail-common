@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.5.3
+Version: 1.5.4
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Wed Apr 27 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.4-1
+- Postfix/amavisd speed_adjust parameter - Enhancement #3379 [NethServer]
+
 * Thu Feb 18 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.3-1
 - Disable Postfix address_verify_negative_cache  - Enhancement #3347 [NethServer]
 - Mail common: remove template warning  - Enhancement #3335 [NethServer]
