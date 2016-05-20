@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.5.3
+Version: 1.5.5
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -40,6 +40,12 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
 
 %changelog
+* Fri May 20 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.5-1
+- Email queue management: limit total email - Enhancement #3377 [NethServer]
+
+* Wed Apr 27 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.4-1
+- Postfix/amavisd speed_adjust parameter - Enhancement #3379 [NethServer]
+
 * Thu Feb 18 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.3-1
 - Disable Postfix address_verify_negative_cache  - Enhancement #3347 [NethServer]
 - Mail common: remove template warning  - Enhancement #3335 [NethServer]
