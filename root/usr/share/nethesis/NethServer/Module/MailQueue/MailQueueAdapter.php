@@ -47,7 +47,7 @@ class MailQueueAdapter extends \Nethgui\Adapter\LazyLoaderAdapter
     {
         $messages = array();
 
-        $process = $this->platform->exec('/usr/bin/sudo /usr/sbin/postqueue -p | /usr/libexec/nethserver/mailq2json');
+        $process = $this->platform->exec('/usr/bin/sudo /usr/sbin/postqueue -p | head -n 4000 | /usr/libexec/nethserver/mailq2json');
         if ($process->getExitCode() == 0) {
             $messages = json_decode($process->getOutput(), TRUE);
         } else {
