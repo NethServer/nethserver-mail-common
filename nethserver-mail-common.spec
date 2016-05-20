@@ -35,6 +35,7 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
 %doc COPYING
+%doc README.rst
 %dir %{_nseventsdir}/%{name}-update
 %dir %attr(2775,root,adm) %{_nsstatedir}/mail-disclaimers
 %config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
