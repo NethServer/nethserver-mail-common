@@ -44,12 +44,6 @@ class Message extends \Nethgui\Controller\AbstractController
 
         $this->declareParameter('MessageSizeMax', $this->createValidator(Validate::POSITIVE_INTEGER)->lessThan(1001), $messageSizeMaxAdapter);
         $this->declareParameter('MessageQueueLifetime', $this->createValidator(Validate::POSITIVE_INTEGER)->lessThan(31), array('configuration', 'postfix', 'MessageQueueLifetime'));
-        $this->declareParameter('SmartHostStatus', Validate::SERVICESTATUS, array('configuration', 'postfix', 'SmartHostStatus'));
-        $this->declareParameter('SmartHostName', Validate::HOSTNAME, array('configuration', 'postfix', 'SmartHostName'));
-        $this->declareParameter('SmartHostPort', Validate::PORTNUMBER, array('configuration', 'postfix', 'SmartHostPort'));
-        $this->declareParameter('SmartHostUsername', Validate::ANYTHING, array('configuration', 'postfix', 'SmartHostUsername'));
-        $this->declareParameter('SmartHostPassword', Validate::ANYTHING, array('configuration', 'postfix', 'SmartHostPassword'));
-        $this->declareParameter('SmartHostTlsStatus', Validate::SERVICESTATUS, array('configuration', 'postfix', 'SmartHostTlsStatus'));
         $this->declareParameter('AlwaysBccStatus', Validate::SERVICESTATUS, array('configuration', 'postfix', 'AlwaysBccStatus'));
         $this->declareParameter('AlwaysBccAddress', Validate::EMAIL, array('configuration', 'postfix', 'AlwaysBccAddress'));
         parent::initialize();
