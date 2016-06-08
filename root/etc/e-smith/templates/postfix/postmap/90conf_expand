@@ -1,7 +1,0 @@
-{
-    #
-    # 90conf_expand
-    #
-
-    $OUT = join(' ', @postmapList);
-}
