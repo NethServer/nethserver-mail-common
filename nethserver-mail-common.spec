@@ -7,9 +7,8 @@ URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Requires: nethserver-base
+Requires: nethserver-mail-smarthost
 Requires: amavisd-new, perl-Convert-BinHex, tmpwatch
-Requires: cyrus-sasl-plain
 
 BuildRequires: nethserver-devtools
 

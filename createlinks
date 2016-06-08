@@ -28,8 +28,6 @@ my @templates = qw(
     /etc/postfix/main.cf
     /etc/postfix/master.cf
     /etc/postfix/transport
-    /etc/postfix/sasl_passwd
-    /etc/postfix/tls_policy
     /etc/postfix/access.cidr
     /etc/postfix/mynetworks.cidr
 );
