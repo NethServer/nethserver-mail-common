@@ -34,7 +34,6 @@ class MailQueue extends \Nethgui\Controller\TableController
     protected function initializeAttributes(\Nethgui\Module\ModuleAttributesInterface $attributes)
     {
         return new \NethServer\Tool\CustomModuleAttributesProvider($attributes, array(
-            'languageCatalog' => array('NethServer_Module_Mail'),
             'category' => 'Status')
         );
     }
