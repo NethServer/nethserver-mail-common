@@ -4,6 +4,8 @@
 
     use Data::Dumper;
     use esmith::util;
+    use esmith::DomainsDB;
+
     $Data::Dumper::Terse = 1;
     $Data::Dumper::Indent = 0;
 
@@ -12,6 +14,11 @@
     $spam_check_status = 0;
 
     @domainList = ( join('.', $SystemName, $DomainName),  $SystemName . '.localdomain',  'localhost');
+
+    $hasDisclaimers = scalar grep {
+        ($_->prop('TransportType') || '') eq 'LocalDelivery'
+        && ($_->prop('DisclaimerStatus') || '') eq 'enabled'
+    } esmith::DomainsDB->open_ro()->get_all_by_prop('type' => 'domain');
 
     '';
 }
