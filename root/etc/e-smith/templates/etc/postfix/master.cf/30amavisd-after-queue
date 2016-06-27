@@ -4,7 +4,9 @@
 	return '';
     }
 
-    push @submission_smtpd_options, 'content_filter=amavisd:[127.0.0.1]:10587';
+    if($hasDisclaimers) {
+        push @submission_smtpd_options, 'content_filter=amavisd:[127.0.0.1]:10587';
+    }
 
     my $maxProcesses = $amavisd{MaxProcesses} > 2 ? $amavisd{MaxProcesses} : 2;
 
