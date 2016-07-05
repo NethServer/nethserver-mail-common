@@ -78,6 +78,7 @@ event_services('nethserver-mail-common-save',
 
 my @domainTemplates = qw(
     /etc/postfix/main.cf
+    /etc/postfix/master.cf
     /etc/postfix/transport
     /etc/postfix/vmailbox
     /etc/amavisd.conf
@@ -86,7 +87,7 @@ my @domainTemplates = qw(
 foreach (qw(create modify delete)) {
     event_templates('domain-' . $_, @domainTemplates);
     event_actions('domain-'   . $_, 'nethserver-mail-postmap-update' => '30');
-    event_services('domain-'  . $_, 'postfix' => 'reload', 'amavisd' => 'reload');
+    event_services('domain-'  . $_, 'postfix' => 'restart', 'amavisd' => 'restart');
 }
 
 #

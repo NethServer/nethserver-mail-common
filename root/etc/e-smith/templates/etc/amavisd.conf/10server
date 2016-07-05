@@ -28,7 +28,7 @@ $enable_db = 0;              # enable use of BerkeleyDB/libdb (SNMP and nanny)
 $enable_global_cache = 1;    # enable use of libdb-based cache if $enable_db=1
 $nanny_details_level = 2;    # nanny verbosity: 1: traditional, 2: detailed
 
-$inet_socket_port = [10024, 10587];   # listen on this local TCP port(s)
+$inet_socket_port = [ { $hasDisclaimers ? '10024, 10587' : '10024' } ];  # listen on this local TCP port(s)
 
 $enable_dkim_verification = 0; # disable DKIM signatures verification
 $enable_dkim_signing = 0; # disable DKIM signing code
