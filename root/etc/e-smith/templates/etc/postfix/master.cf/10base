@@ -24,11 +24,9 @@ flush     unix  n       -       n       1000?   0       flush
 proxymap  unix  -       -       n       -       -       proxymap
 proxywrite unix -       -       n       -       1       proxymap
 smtp      unix  -       -       n       -       -       smtp
-        -o syslog_name=default
 # When relaying mail as backup MX, disable fallback_relay to avoid MX loops
 relay     unix  -       -       n       -       -       smtp
-	-o smtp_fallback_relay=
-        -o syslog_name=relay
+    -o smtp_fallback_relay=
 #       -o smtp_helo_timeout=5 -o smtp_connect_timeout=5
 showq     unix  n       -       n       -       -       showq
 error     unix  -       -       n       -       -       error
@@ -37,7 +35,6 @@ discard   unix  -       -       n       -       -       discard
 local     unix  -       n       n       -       -       local
 virtual   unix  -       n       n       -       -       virtual
 lmtp      unix  -       -       n       -       -       lmtp
-        -o syslog_name=delivery
 anvil     unix  -       -       n       -       1       anvil
 scache    unix  -       -       n       -       1       scache
 
