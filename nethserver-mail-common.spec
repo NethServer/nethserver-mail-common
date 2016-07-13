@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.5.5
+Version: 1.5.6
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Wed Jul 13 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.6-1
+- SMTP mail reception delayed in receive only systems - Bug #3411 [NethServer]
+
 * Fri May 20 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.5-1
 - Email queue management: limit total email - Enhancement #3377 [NethServer]
 
