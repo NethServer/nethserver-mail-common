@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.6.0
+Version: 1.6.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -40,6 +40,9 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
 
 %changelog
+* Thu Jul 21 2016 Davide Principi <davide.principi@nethesis.it> - 1.6.1-1
+- SMTP mail reception delayed in receive only systems - NethServer/dev#5050
+
 * Thu Jul 07 2016 Stefano Fancello <stefano.fancello@nethesis.it> - 1.6.0-1
 - First NS7 release
 
