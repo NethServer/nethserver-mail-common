@@ -6,14 +6,11 @@ $defang_maps_by_ccat\{+CC_CATCHALL\} = [ 'disclaimer' ];
 @disclaimer_options_bysender_maps = ( {
     use esmith::DomainsDB;
 
-    $domainsDb = esmith::DomainsDB->open_ro() || die("Could not open DomainsDB");
-
     my $baseDir = '/var/lib/nethserver/mail-disclaimers/';
 
-    my @enabledDomains =  grep { 
-	my $disclaimerStatus = $domainsDb->get_prop($_, 'DisclaimerStatus'); 
-	defined $disclaimerStatus && $disclaimerStatus eq 'enabled' ? $_ : undef;  
-    } @domainList;
+    my @enabledDomains = map {
+        ($_->prop('DisclaimerStatus') || '') eq 'enabled' ? $_->key : ()
+    } esmith::DomainsDB->open_ro()->get_all_by_prop('type' => 'domain');
 
     my %disclaimerMap = ( 
         '.' => $baseDir . '_default_', # The default empty disclaimer. Fixes #1819

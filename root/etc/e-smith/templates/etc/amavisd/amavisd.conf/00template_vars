@@ -16,8 +16,7 @@
     @domainList = ( join('.', $SystemName, $DomainName),  $SystemName . '.localdomain',  'localhost');
 
     $hasDisclaimers = scalar grep {
-        ($_->prop('TransportType') || '') eq 'LocalDelivery'
-        && ($_->prop('DisclaimerStatus') || '') eq 'enabled'
+        ($_->prop('DisclaimerStatus') || '') eq 'enabled'
     } esmith::DomainsDB->open_ro()->get_all_by_prop('type' => 'domain');
 
     '';
