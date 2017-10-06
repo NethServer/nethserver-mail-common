@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.6.4
+Version: 1.6.5
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -40,6 +40,9 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
 
 %changelog
+* Fri Oct 06 2017 Davide Principi <davide.principi@nethesis.it> - 1.6.5-1
+- Sieve errors prevent mail forwarding - Bug NethServer/dev#5351
+
 * Thu Jul 06 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.6.4-1
 - Backup-data: add bayes db - NethServer/dev#5325
 
