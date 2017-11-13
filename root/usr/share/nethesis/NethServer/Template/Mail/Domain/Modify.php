@@ -32,6 +32,10 @@ foreach ($view['PlugTransport'] as $pluginView) {
     );
 }
 
+$transportTypeTarget = $view->getClientEventTarget('TransportType');
+$domainTarget = $view->getClientEventTarget('domain');
+$jsPrimaryDomain = json_encode(explode('.', gethostname(), 2)[1]);
+
 echo $transportPanel;
 
 echo $view->fieldsetSwitch('DisclaimerStatus', 'enabled', $view::FIELDSETSWITCH_EXPANDABLE | $view::FIELDSETSWITCH_CHECKBOX)
@@ -40,3 +44,12 @@ echo $view->fieldsetSwitch('DisclaimerStatus', 'enabled', $view::FIELDSETSWITCH_
 
 
 echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP | $view::BUTTON_CANCEL);
+
+$view->includeJavascript("
+(function ( \$ ) {
+    \$('.${domainTarget}').on('nethguiupdateview', function(ev, domain) {
+        console.log(domain);
+        \$('.${transportTypeTarget}[value=Relay]').trigger(domain == $jsPrimaryDomain ? 'nethguidisable' : 'nethguienable');
+    });
+} ( jQuery ));
+");
