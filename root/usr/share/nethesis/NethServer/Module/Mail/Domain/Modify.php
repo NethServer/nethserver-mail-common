@@ -55,6 +55,15 @@ class Modify extends \Nethgui\Controller\Table\Modify
         parent::initialize();
     }
 
+    public function validate(\Nethgui\Controller\ValidationReportInterface $report)
+    {
+        parent::validate($report);
+        $primaryDomain = explode('.', gethostname(), 2)[1];
+        if($this->getRequest()->isMutation() && $primaryDomain === $this->parameters['domain'] && $this->parameters['TransportType'] === 'Relay') {
+            $report->addValidationErrorMessage($this, 'domain', 'valid_relay_notprimarydomain');
+        }
+    }
+
     public function readDisclaimerFile()
     {
         if ( ! isset($this->parameters['domain'])) {
