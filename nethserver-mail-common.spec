@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.5.6
+Version: 1.5.7
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name} 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Fri Nov 24 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.7-1
+- GSSAPI error from Postfix smarthost client - Bug NethServer/dev#5366
+
 * Wed Jul 13 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.6-1
 - SMTP mail reception delayed in receive only systems - Bug #3411 [NethServer]
 
