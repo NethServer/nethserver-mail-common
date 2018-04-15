@@ -7,7 +7,7 @@ URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Provides: nethserver-mail-disclaimer = 0.0.0
+Requires: nethserver-mail-disclaimer
 Requires: nethserver-mail-smarthost
 Requires: amavisd-new, perl-Convert-BinHex, tmpwatch
 
@@ -15,6 +15,14 @@ BuildRequires: nethserver-devtools
 
 %description
 Common configuration for mail packages, based on Postfix.
+
+%package -n nethserver-mail-disclaimer
+Summary: Append legal/disclaimer text to outbound messages
+BuildArch: noarch
+%description -n nethserver-mail-disclaimer
+Append legal/disclaimer text to outbound messages with alteMIME
+
+This is a placeholder package for the future upgrade to version 2
 
 %prep
 %setup
@@ -39,6 +47,10 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %dir %{_nseventsdir}/%{name}-update
 %dir %attr(2775,root,adm) %{_nsstatedir}/mail-disclaimers
 %config %attr (0440,root,root) %{_sysconfdir}/sudoers.d/20_nethserver_mail_common
+
+%files -n nethserver-mail-disclaimer
+%doc COPYING
+%doc README.rst
 
 %changelog
 * Fri Nov 24 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.6.6-1
