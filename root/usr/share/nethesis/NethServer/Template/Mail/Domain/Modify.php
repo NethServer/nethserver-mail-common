@@ -34,7 +34,11 @@ foreach ($view['PlugTransport'] as $pluginView) {
 
 $transportTypeTarget = $view->getClientEventTarget('TransportType');
 $domainTarget = $view->getClientEventTarget('domain');
-$jsPrimaryDomain = json_encode(explode('.', gethostname(), 2)[1]);
+if(@file_exists('/etc/e-smith/db/configuration/defaults/dovecot/type')) {
+    $jsPrimaryDomain = json_encode(explode('.', gethostname(), 2)[1]);
+} else {
+    $jsPrimaryDomain = '"/"'; // a domain that never matches
+}
 
 echo $transportPanel;
 
@@ -48,7 +52,6 @@ echo $view->buttonList($view::BUTTON_SUBMIT | $view::BUTTON_HELP | $view::BUTTON
 $view->includeJavascript("
 (function ( \$ ) {
     \$('.${domainTarget}').on('nethguiupdateview', function(ev, domain) {
-        console.log(domain);
         \$('.${transportTypeTarget}[value=Relay]').trigger(domain == $jsPrimaryDomain ? 'nethguidisable' : 'nethguienable');
     });
 } ( jQuery ));

@@ -59,7 +59,11 @@ class Modify extends \Nethgui\Controller\Table\Modify
     {
         parent::validate($report);
         $primaryDomain = explode('.', gethostname(), 2)[1];
-        if($this->getRequest()->isMutation() && $primaryDomain === $this->parameters['domain'] && $this->parameters['TransportType'] === 'Relay') {
+        if($this->getRequest()->isMutation()
+            && @file_exists('/etc/e-smith/db/configuration/defaults/dovecot/type')
+            && $primaryDomain === $this->parameters['domain']
+            && $this->parameters['TransportType'] === 'Relay'
+        ) {
             $report->addValidationErrorMessage($this, 'domain', 'valid_relay_notprimarydomain');
         }
     }
