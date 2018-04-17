@@ -1,6 +1,6 @@
 Summary: Common configuration for mail packages
 Name: nethserver-mail-common
-Version: 1.6.6
+Version: 1.6.7
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -53,6 +53,10 @@ mkdir -p %{buildroot}/%{_nsstatedir}/mail-disclaimers
 %doc README.rst
 
 %changelog
+* Tue Apr 17 2018 Davide Principi <davide.principi@nethesis.it> - 1.6.7-1
+- Append a legal note to sent messages for Email 2 - NethServer/dev#5452
+- SMTP proxy cannot relay primary mail domain  - Bug NethServer/dev#5456
+
 * Fri Nov 24 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.6.6-1
 - LocalDelivery mail domain actually relayed - NethServer/dev#5387
 
